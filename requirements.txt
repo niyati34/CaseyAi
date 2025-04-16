@@ -1,21 +1,14 @@
-# Web automation
-selenium==4.10.0
-webdriver-manager==3.8.6
+Flask==3.1.0
+pandas==2.2.3
+protobuf==6.30.2
+python-dotenv==1.1.0
+python_docx==1.1.2
+Requests==2.32.3
+selenium==4.31.0
+webdriver_manager==4.0.2
 
 # Data handling
-pandas==2.0.3
 openpyxl==3.1.2
-
-# Document processing
-python-docx==0.8.11
-
-# API interactions
-requests==2.31.0
-
-# Web framework
-Flask==2.3.3
 
 # AI integration
 google-generativeai==0.3.1
-
-# Environment variables
