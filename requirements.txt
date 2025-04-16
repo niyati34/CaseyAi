@@ -1,0 +1,21 @@
+# Web automation
+selenium==4.10.0
+webdriver-manager==3.8.6
+
+# Data handling
+pandas==2.0.3
+openpyxl==3.1.2
+
+# Document processing
+python-docx==0.8.11
+
+# API interactions
+requests==2.31.0
+
+# Web framework
+Flask==2.3.3
+
+# AI integration
+google-generativeai==0.3.1
+
+# Environment variables
