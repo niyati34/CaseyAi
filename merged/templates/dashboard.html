@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Casey - Test Automation Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+  
+    
+         <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px; /* Space between charts */
+            margin-bottom: 30px;
+        }
+        #areaChart {
+    margin-top: 50px;
+}
+
+        .chart-box {
+            width: 400px; /* Equal width for both charts */
+            height: 300px;
+        }
+
+        .area-container {
+            width: 80%;
+            margin: auto;
+            margin-bottom: 40px;
+            margin-top: 70px;
+        }
+    
+        :root {
+            --primary-color: #9333ea;
+            --primary-hover: #7e22ce;
+            --light-bg: #f9fafb;
+            --card-border: #e5e7eb;
+            --header-color: #111827;
+            --text-color: #374151;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1.5rem;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            color: #6b7280;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-icon {
+            margin-right: 0.5rem;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--header-color);
+            margin: 0;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .card {
+            border: 1px solid var(--card-border);
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            background-color: #fff;
+            border-radius: 0.5rem;
+        }
+        
+        .tabs-wrapper {
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .nav-tabs {
+            border-bottom: none;
+        }
+        
+        .nav-tabs .nav-link {
+            border: none;
+            border-bottom: 2px solid transparent;
+            border-radius: 0;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+        }
+        
+        .nav-tabs .nav-link.active {
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+        
+        .form-control, .form-select {
+            border: 1px solid #d1d5db;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(147, 51, 234, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .test-cases-card {
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .btn-success {
+            background-color: #10b981;
+            border-color: #10b981;
+        }
+        
+        .btn-success:hover {
+            background-color: #059669;
+            border-color: #059669;
+        }
+        
+        .btn-danger {
+            background-color: #ef4444;
+            border-color: #ef4444;
+        }
+        
+        .btn-danger:hover {
+            background-color: #dc2626;
+            border-color: #dc2626;
+        }
+        
+        .badge.bg-success {
+            background-color: #10b981 !important;
+        }
+        
+        .badge.bg-danger {
+            background-color: #ef4444 !important;
+        }
+        
+        .badge.bg-secondary {
+            background-color: #6b7280 !important;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Casey</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt nav-icon"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-list-check nav-icon"></i>Requirements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-vial nav-icon"></i>Test Cases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-cog nav-icon"></i>Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Flash Messages (keeping from original) -->
+        <div class="row">
+            <div class="col-12 mt-3">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category if category != 'message' else 'info' }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Project A Dashboard Overview</h1>
+        </div>
+
+       
+    
+        <!-- Main Content -->
+        <div class="card test-cases-card">
+            <div class="tabs-wrapper">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="test-automation-tab" data-bs-toggle="tab" data-bs-target="#test-automation" type="button" role="tab" aria-controls="test-automation" aria-selected="true">
+                            Test Automation
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="test-generation-tab" data-bs-toggle="tab" data-bs-target="#test-generation" type="button" role="tab" aria-controls="test-generation" aria-selected="false">
+                            Test Case Generation
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content p-4" id="myTabContent">
+                <!-- Test Automation Tab -->
+                <div class="tab-pane fade show active" id="test-automation" role="tabpanel" aria-labelledby="test-automation-tab">
+                    <div class="mb-4">
+                       <h2 class="h4 mb-3">Test Automation Management</h2>
+                        
+
+    <!-- Doughnut & Gauge Charts (Side by Side) -->
+    <div class="chart-container">
+        <div class="chart-box">
+            <h3>Pass vs Fail</h3>
+            <canvas id="doughnutChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <h3>Test Completion</h3>
+            <canvas id="gaugeChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Area Chart (Below) -->
+    
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('/get_chart_data');
+            const data = await response.json();
+            
+            // Doughnut Chart (Pass vs Fail)
+            new Chart(document.getElementById('doughnutChart'), {
+                type: 'doughnut',
+                data: { 
+                    labels: ["Passed", "Failed"],
+                    datasets: [{
+                        data: data.doughnut,
+                        backgroundColor:  ["#9333ea","lightgrey"]
+                    }]
+                }
+            });
+
+            // Gauge Chart (Test Completion Percentage)
+            var gauge = new Gauge(document.getElementById("gaugeChart")).setOptions({
+                angle: 0, lineWidth: 0.2, radiusScale: 1, pointer: { length: 0.6, strokeWidth: 0.03 },
+                limitMax: false, limitMin: false, colorStart: "#9333ea", colorStop: "#7e22ce",
+                strokeColor: "#E0E0E0", highDpiSupport: true
+            });
+            gauge.maxValue = 100;
+            gauge.setMinValue(0);
+            gauge.animationSpeed = 32;
+            gauge.set(data.gauge);
+
+            // Area Chart (Test Execution Over Time)
+            
+        }
+        
+        fetchData();
+    </script>
+                        <div class="d-flex justify-content-end mb-3">
+                            <a href="{{ url_for('run_tests') }}" class="btn btn-success me-2">
+                                <i class="fas fa-play me-1"></i> Run All Tests
+                            </a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#clearTestsModal">
+                                <i class="fas fa-trash me-1"></i> Clear All Tests
+                            </button>
+                        </div>
+                    </div>
+                    
+
+                    <div class="card">
+                        <div class="card-header">
+                            Existing Test Cases
+                        </div>
+                        <div class="card-body">
+                            <!-- Test Cases Table -->
+                            <form id="clearSelectedForm" action="{{ url_for('clear_selected_tests') }}" method="post">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th><input type="checkbox" id="selectAll"></th>
+                                                <th>ID</th>
+                                                <th>Description</th>
+                                                <th>Website URL</th>
+                                                <th>Username</th>
+                                                <th>Password</th>
+                                                <th>Expected</th>
+                                                <th>Result</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if tests %}
+                                                {% for test in tests %}
+                                                    <tr>
+                                                        <td><input type="checkbox" name="selected_tests[]" value="{{ test.id }}"></td>
+                                                        <td>{{ test.id }}</td>
+                                                        <td>{{ test.description }}</td>
+                                                        <td>{{ test.website_url }}</td>
+                                                        <td>{{ test.username }}</td>
+                                                        <td>******</td>
+                                                        <td>{{ test.expected }}</td>
+                                                        <td>
+                                                            {% if test.actual_result is defined %}
+                                                                {% if test.actual_result == "Success" %}
+                                                                    <span class="badge bg-success">Success</span>
+                                                                {% elif test.actual_result == "Failed" %}
+                                                                    <span class="badge bg-danger">Failed</span>
+                                                                {% else %}
+                                                                    <span class="badge bg-warning text-dark">{{ test.actual_result }}</span>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <span class="badge bg-secondary">Not Run</span>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% else %}
+                                                <tr>
+                                                    <td colspan="8" class="text-center">No test cases added yet.</td>
+                                                </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% if tests %}
+                                    <button type="submit" class="btn btn-outline-danger mt-3">
+                                        <i class="fas fa-trash-alt me-1"></i> Clear Selected
+                                    </button>
+                                {% endif %}
+                            </form>
+
+                            {% if request.args.get('download_report') %}
+                                <div class="alert alert-success mt-3">
+                                    <p><i class="fas fa-file-download me-2"></i> Report is ready for download!</p>
+                                    <a href="{{ url_for('download_report', filename=request.args.get('download_report')) }}" class="btn btn-primary">
+                                        <i class="fas fa-download me-1"></i> Download Report
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Add New Test Cases -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            Add New Test Cases
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ url_for('add_test_cases') }}" method="post" id="addTestFormInline">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="inline_test_id" class="form-label">Test ID</label>
+                                            <input type="text" class="form-control" id="inline_test_id" name="test_id[]" placeholder="TC-0001" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label for="inline_description" class="form-label">Description</label>
+                                            <input type="text" class="form-control" id="inline_description" name="description[]" placeholder="Test case description" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="inline_website_url" class="form-label">Website URL</label>
+                                            <input type="url" class="form-control" id="inline_website_url" name="website_url[]" placeholder="https://example.com/login" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="inline_username" class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="inline_username" name="username[]" placeholder="testuser" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="inline_password" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="inline_password" name="password[]" placeholder="password" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="inline_expected" class="form-label">Expected Result</label>
+                                            <select class="form-select" id="inline_expected" name="expected[]" required>
+                                                <option value="Success">Success</option>
+                                                <option value="Failed">Failed</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 d-flex align-items-end">
+                                        <button type="button" class="btn btn-outline-primary me-2" id="advanced-options-toggle">
+                                            Advanced Options
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Advanced Options (Hidden by Default) -->
+                                <div id="advanced-options" class="d-none">
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="inline_username_field" class="form-label">Username Field</label>
+                                                <input type="text" class="form-control" id="inline_username_field" name="username_field[]" placeholder="username" value="username">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="inline_password_field" class="form-label">Password Field</label>
+                                                <input type="text" class="form-control" id="inline_password_field" name="password_field[]" placeholder="password" value="password">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="inline_submit_button" class="form-label">Submit Button</label>
+                                                <input type="text" class="form-control" id="inline_submit_button" name="submit_button[]" placeholder="login" value="login">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="inline_success_indicators" class="form-label">Success Indicators</label>
+                                                <input type="text" class="form-control" id="inline_success_indicators" name="success_indicators[]" placeholder="dashboard,home,profile" value="dashboard,home,profile,welcome,index">
+                                                <div class="form-text">Comma-separated words to identify successful login</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="inline_logout_url" class="form-label">Logout URL (Optional)</label>
+                                                <input type="text" class="form-control" id="inline_logout_url" name="logout_url[]" placeholder="https://example.com/logout">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <button type="button" class="btn btn-outline-primary me-2" id="add-another-test-btn">
+                                        <i class="fas fa-plus-circle me-1"></i> Add Another Test Case
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-1"></i> Save Test Cases
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Test Case Generation Tab -->
+                <div class="tab-pane fade" id="test-generation" role="tabpanel" aria-labelledby="test-generation-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <i class="fas fa-magic me-2"></i>Generate Test Cases with AI
+                                </div>
+                                <div class="card-body">
+                                    <form action="{{ url_for('generate_test_cases') }}" method="post">
+                                        <div class="mb-3">
+                                            <label for="page_name" class="form-label">Page/Feature Name</label>
+                                            <input type="text" class="form-control" id="page_name" name="page_name" placeholder="Login Page, Registration Form, etc." required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="additional_context" class="form-label">Additional Context (Optional)</label>
+                                            <textarea class="form-control" id="additional_context" name="additional_context" rows="5" placeholder="Describe the page features, functionality, requirements, etc. to get more relevant test cases"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-magic me-1"></i> Generate Test Cases
+                                        </button>
+                                    </form>
+                                    
+                                    <div class="mt-4">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i> The AI will generate test cases based on the provided information and return a Word document.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <i class="fab fa-figma me-2"></i>Generate Test Cases from Figma Design
+                                </div>
+                                <div class="card-body">
+                                    <form action="{{ url_for('generate_from_figma') }}" method="post">
+                                        <div class="mb-3">
+                                            <label for="figma_file_key" class="form-label">Figma File Key</label>
+                                            <input type="text" class="form-control" id="figma_file_key" name="figma_file_key" placeholder="e.g. aBcDeFgHiJkL" required>
+                                            <div class="form-text">The file key is found in the Figma URL: figma.com/file/<span class="text-danger">aBcDeFgHiJkL</span>/...</div>
+                                        </div>
+                                        <!-- Hidden to match provided UI but keeping for Flask functionality -->
+                                        <input type="hidden" id="figma_access_token" name="figma_access_token" value="{{ figma_token }}">
+                                        
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fab fa-figma me-1"></i> Generate Test Cases from Figma
+                                        </button>
+                                    </form>
+                                    
+                                    <div class="mt-4">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i> The system will analyze your Figma design and generate appropriate test cases in a Word document.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Test Case Modal (Keeping from original) -->
+    <!-- Clear Tests Confirmation Modal (Keeping from original) -->
+    <div class="modal fade" id="clearTestsModal" tabindex="-1" aria-labelledby="clearTestsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="clearTestsModalLabel"><i class="fas fa-exclamation-triangle me-2"></i>Clear All Test Cases</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to clear all test cases? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="{{ url_for('clear_tests') }}" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i> Clear All
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle advanced options
+        document.getElementById('advanced-options-toggle').addEventListener('click', function() {
+            const advancedOptions = document.getElementById('advanced-options');
+            advancedOptions.classList.toggle('d-none');
+            this.textContent = advancedOptions.classList.contains('d-none') ? 'Advanced Options' : 'Hide Advanced Options';
+        });
+
+        // Select all checkboxes
+        document.getElementById('selectAll')?.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('input[name="selected_tests[]"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+
+        // Clone and add a new test case in the modal
+        document.getElementById('add-test-case-btn')?.addEventListener('click', function() {
+            const container = document.getElementById('test-cases-container');
+            const testCases = container.querySelectorAll('.test-case-form');
+            const lastTestCase = testCases[testCases.length - 1];
+            const newTestCase = lastTestCase.cloneNode(true);
+            
+            // Update IDs and clear values
+            const newIndex = testCases.length;
+            const inputs = newTestCase.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                const name = input.getAttribute('name');
+                const idBase = input.id.split('_').slice(0, -1).join('_');
+                input.id = `${idBase}_${newIndex}`;
+                
+                // Only clear non-default fields
+                if (!(['username_field[]', 'password_field[]', 'submit_button[]', 'success_indicators[]'].includes(name))) {
+                    input.value = '';
+                }
+            });
+            
+            // Append the new test case
+            container.appendChild(newTestCase);
+            
+            // Add a remove button for all but the first test case
+            if (testCases.length > 0) {
+                const removeButton = document.createElement('button');
+                removeButton.type = 'button';
+                removeButton.className = 'btn btn-sm btn-outline-danger mt-2';
+                removeButton.innerHTML = '<i class="fas fa-times me-1"></i> Remove this test case';
+                removeButton.onclick = function() {
+                    this.closest('.test-case-form').remove();
+                };
+                newTestCase.appendChild(removeButton);
+            }
+        });
+        
+        // Add another test inline
+        document.getElementById('add-another-test-btn')?.addEventListener('click', function() {
+            const form = document.getElementById('addTestFormInline');
+            const originalInputs = form.querySelectorAll('input, select');
+            const dividers = form.querySelectorAll('.row');
+            
+            // Clone each row and clear input values
+            dividers.forEach(divider => {
+                const clone = divider.cloneNode(true);
+                const inputs = clone.querySelectorAll('input, select');
+                
+                inputs.forEach(input => {
+                    const name = input.getAttribute('name');
+                    // Only clear non-default fields
+                    if (!(['username_field[]', 'password_field[]', 'submit_button[]', 'success_indicators[]'].includes(name))) {
+                        input.value = '';
+                    }
+                });
+                
+                form.insertBefore(clone, this.parentNode);
+            });
+            
+            // Add a visual separator
+            const separator = document.createElement('hr');
+            separator.className = 'my-4';
+            form.insertBefore(separator, this.parentNode);
+        });
+    </script>
+</body>
+</html>

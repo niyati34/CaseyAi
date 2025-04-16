@@ -1,0 +1,87 @@
+/* General */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #F5F5F5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+/* Navbar */
+.navbar {
+    background: #ffffff;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a:hover i {
+    color: #5A67D8;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 200px;
+    background: #EAEAEA;
+    padding: 20px;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 100%;
+}
+
+.project-btn {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+}
+
+.project-btn:hover {
+    color: #5A67D8;
+}
+
+/* Main Dashboard */
+.dashboard-container {
+    margin-left: 220px;
+    padding: 80px 20px;
+}
+
+/* Summary Cards */
+.summary-cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+}
