@@ -1,6 +1,6 @@
 Flask==3.1.0
 pandas==2.2.3
-protobuf==6.30.2
+protobuf==4.25.3
 python-dotenv==1.1.0
 python_docx==1.1.2
 Requests==2.32.3
