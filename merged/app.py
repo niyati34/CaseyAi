@@ -44,7 +44,12 @@ def run_test():
     password = data["password"]
 
     try:
-        result = subprocess.run(["your_command_here"], capture_output=True, text=True, check=True)
+        subprocess.run([
+            "python", "merged/fetch.py",
+            "--url", url,
+            "--username", username,
+            "--password", password
+        ], capture_output=True, text=True, check=True)
         return "Test Success"  # Explicitly return success only if no error occurs
     except subprocess.CalledProcessError as e:
          return f"Test Failed: {e.stderr}"  # Indicate failure properly

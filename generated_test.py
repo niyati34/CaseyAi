@@ -1,41 +1,37 @@
-import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
-class LoginTest(unittest.TestCase):
+username = "92200103139"
+password = "tree981@"
 
-    def setUp(self):
-        self.driver = webdriver.Chrome()
-        self.driver.get("https://practicetestautomation.com/practice-test-login/")
+try:
+    driver = webdriver.Chrome()  # Or whichever driver you're using
+    driver.get("https://login.marwadiuniversity.ac.in:553/")
 
-    def test_login(self):
+    try:
+        username_field = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "txtuser")))
+        password_field = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "txtpass")))
+        login_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "btnLogin")))
+        
+        username_field.send_keys(username)
+        password_field.send_keys(password)
+        login_button.click()
+
         try:
-            username_field = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.ID, "username"))
-            )
-            password_field = self.driver.find_element(By.ID, "password")
-            submit_button = self.driver.find_element(By.ID, "submit")
+            WebDriverWait(driver, 10).until(EC.url_contains("muonline.marwadiuniversity.ac.in")) # Example success URL
+            print("✅test") 
+        except TimeoutException:
+           if "Dashboard" in driver.page_source or "Logout" in driver.page_source or "Welcome" in driver.page_source: # Example success keywords
+             print("✅test")
+           else:
+             print("❌test")
 
-            username_field.send_keys("student")
-            password_field.send_keys("Password123")
-            submit_button.click()
-
-            WebDriverWait(self.driver, 10).until(
-                EC.url_contains("logged-in-successfully")
-            )
-            
-            print("✅test")
-
-        except Exception as e:
-            print("❌test")
-            print(e)
+    except (TimeoutException, NoSuchElementException):
+        print("❌test")
 
 
-    def tearDown(self):
-        self.driver.quit()
-
-
-if __name__ == "__main__":
-    unittest.main()
+finally:
+    driver.quit()
