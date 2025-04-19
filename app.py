@@ -48,7 +48,7 @@ def run_test():
 
     try:
         subprocess.run([
-            "python", "merged/fetch.py",
+            "python", "fetch.py",
             "--url", url,
             "--username", username,
             "--password", password
