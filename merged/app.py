@@ -52,7 +52,7 @@ def run_test():
             "--url", url,
             "--username", username,
             "--password", password
-        ], capture_output=True, text=True, check=True)
+        ], capture_output=True, text=True, check=True,encoding="utf-8")
         return "Test Success"  # Explicitly return success only if no error occurs
     except subprocess.CalledProcessError as e:
          return f"Test Failed: {e.stderr}"  # Indicate failure properly

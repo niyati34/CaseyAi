@@ -2,7 +2,7 @@ import argparse
 import google.generativeai as genai
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
@@ -10,8 +10,8 @@ import time
 import subprocess
 import re
 import sys
-sys.stdout.reconfigure(encoding='utf-8')  # ✅ Force UTF-8 output
 
+sys.stdout.reconfigure(encoding='utf-8')  # ✅ Force UTF-8 output
 
 # ✅ Accept inputs dynamically
 parser = argparse.ArgumentParser(description="Automated login test using Selenium.")
@@ -29,14 +29,39 @@ password = args.password
 genai.configure(api_key="AIzaSyBo7AFXOGqvKLQ5CZ0w9J67QK0T_8SR43A")  # 🔴 Update with a valid API key
 model = genai.GenerativeModel("gemini-1.5-pro-latest")
 
-# 🚀 Setup Selenium WebDriver
-service = Service(ChromeDriverManager().install())
-options = webdriver.ChromeOptions()
-options.add_argument("--headless")  
-options.add_argument("--disable-blink-features=AutomationControlled")
+# ✅ Custom Driver Setup with Fallback to Headless
+def setup_driver():
+    def try_driver(headless=False):
+        try:
+            options = webdriver.ChromeOptions()
+            if headless:
+                options.add_argument("--headless")
+            options.add_argument("--disable-blink-features=AutomationControlled")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--disable-gpu")
+            options.add_argument("--window-size=1920,1080")
+            service = ChromeService(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=options)
+            driver.get(url)
+            return driver
+        except Exception as e:
+            print(f"❌ Driver setup failed (headless={headless}): {e}")
+            return None
 
-driver = webdriver.Chrome(service=service, options=options)
-driver.get(url)
+    # Try normal mode first, then fallback to headless
+    driver = try_driver(headless=False)
+    if not driver:
+        print("🔁 Retrying in headless mode...")
+        driver = try_driver(headless=True)
+
+    return driver
+
+# 🚀 Initialize WebDriver
+driver = setup_driver()
+if not driver:
+    print("❌ WebDriver initialization failed completely. Exiting.")
+    sys.exit(1)
 
 wait = WebDriverWait(driver, 10)
 
@@ -49,9 +74,9 @@ for field in input_fields:
     name = field.get_attribute("name")
     id_ = field.get_attribute("id")
     type_ = field.get_attribute("type")
-    placeholder = field.get_attribute("aria-label") or field.get_attribute("placeholder")  # Use aria-label for Instagram
+    placeholder = field.get_attribute("aria-label") or field.get_attribute("placeholder")
     input_fields_data.append(f"Type: {type_}, Name: {name}, ID: {id_}, Placeholder: {placeholder}")
-    
+
 input_fields_str = "\n".join(input_fields_data)
 print(input_fields_str)
 
@@ -59,9 +84,7 @@ print(input_fields_str)
 print("\n🔹 Extracting Submit Button:")
 submit_button_data = ""
 
-# 🔍 **Try multiple ways to locate the button**
 try:
-    # **Method 1: Find button using common submit types**
     submit_button = driver.find_element(By.XPATH, "//button[@type='submit']")
     btn_text = submit_button.text.strip() or "(No text found)"
     btn_class = submit_button.get_attribute("class")
@@ -70,42 +93,33 @@ try:
 
 except:
     print("⚠️ Submit button not found using XPath! Trying alternative methods...")
-
     try:
-        # **Method 2: Check for button by ID**
         submit_button = wait.until(EC.presence_of_element_located((By.ID, "submit")))
         btn_text = submit_button.text.strip() or submit_button.get_attribute("value") or "(No text found)"
         btn_class = submit_button.get_attribute("class")
         submit_button_data = f"✅ Found using ID → Button Text: {btn_text}, Class: {btn_class}"
         print(submit_button_data)
-
     except:
         try:
-            # **Method 3: Check for button by NAME**
             submit_button = wait.until(EC.presence_of_element_located((By.NAME, "btnLogin")))
             btn_text = submit_button.text.strip() or submit_button.get_attribute("value") or "(No text found)"
             btn_class = submit_button.get_attribute("class")
             submit_button_data = f"✅ Found using Name → Button Text: {btn_text}, Class: {btn_class}"
             print(submit_button_data)
-
         except:
             try:
-                # **Method 4: Locate using `<input type='submit'>`**
                 submit_button = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='submit']")))
                 btn_text = submit_button.get_attribute("value") or "(No text found)"
                 btn_class = submit_button.get_attribute("class")
                 submit_button_data = f"✅ Found using Input Type → Button Text: {btn_text}, Class: {btn_class}"
                 print(submit_button_data)
-
             except:
                 try:
-                    # **Method 5: Locate using generic button tags**
                     submit_button = wait.until(EC.presence_of_element_located((By.TAG_NAME, "button")))
                     btn_text = submit_button.text.strip() or "(No text found)"
                     btn_class = submit_button.get_attribute("class")
                     submit_button_data = f"✅ Found using Generic Button Tag → Button Text: {btn_text}, Class: {btn_class}"
                     print(submit_button_data)
-
                 except Exception as e:
                     submit_button_data = f"❌ Submit button not found! Error: {e}"
                     print(submit_button_data)
@@ -165,5 +179,8 @@ try:
 except subprocess.CalledProcessError as e:
     print(f"❌ Test Execution Failed: {e}")
 
-# 🛑 Close Browser
-driver.quit()
+# 🛑 Close Browser Again (just in case)
+try:
+    driver.quit()
+except:
+    pass
