@@ -110,7 +110,7 @@ def get_report_filename():
 
 
 # ✅ Setup Selenium WebDriver with Cross-Browser Support and Custom URL
-def setup_driver(website_url=None, browser_type="chrome", headless=False):
+def setup_driver(website_url=None, browser_type="chrome", headless=True):
     driver = None
     
     try:
