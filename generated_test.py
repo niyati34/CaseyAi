@@ -13,8 +13,8 @@ try:
     username_field.send_keys("student")
     password_field.send_keys("Password123")
     submit_button.click()
-    time.sleep(2)  # Allow time for page load after login
-    if "Logged In Successfully" in driver.page_source or driver.current_url == "https://practicetestautomation.com/logged-in-successfully/":
+    WebDriverWait(driver, 10).until(EC.url_contains("logged-in-successfully/"))  # Check URL for success 
+    if "Logged In Successfully" in driver.page_source:
         print("✅test")
     else:
         print("❌test")
