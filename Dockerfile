@@ -20,6 +20,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+    
 # Copy the entire project folder into /app
 COPY . .
 
