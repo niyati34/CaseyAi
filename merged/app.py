@@ -24,6 +24,8 @@ import subprocess
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.edge.service import Service as EdgeService
+import logging
+
 
 
 
@@ -111,99 +113,116 @@ def get_report_filename():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     return f"test_report_{timestamp}.docx"
 
-
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 # ✅ Setup Selenium WebDriver with Cross-Browser Support and Custom URL
-def setup_driver(website_url=None, browser_type="chrome", headless=False):
+def setup_driver(website_url=None, browser_type="chrome", headless=True):
+    """
+    Setup WebDriver with cross-browser support
+    
+    Args:
+        website_url (str): URL to open. Default is None.
+        browser_type (str): Browser to use (chrome, firefox, edge). Default is chrome.
+        headless (bool): Run in headless mode. Default is True for deployment environments.
+        
+    Returns:
+        WebDriver instance or None if setup fails
+    """
     driver = None
+    
+    # Detect if running in a container/CI environment
+    is_container = os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('CONTAINER') or not os.path.exists('/dev/tty')
     
     try:
         # Setup Chrome browser
         if browser_type.lower() == "chrome":
+            logger.info("Setting up Chrome WebDriver")
             chrome_options = ChromeOptions()
-            if headless:
-                chrome_options.add_argument("--headless")
-            chrome_options.add_argument("--window-size=1920,1080")
-            chrome_options.add_argument("--disable-gpu")
-            chrome_options.add_argument("--no-sandbox")
-            chrome_options.add_argument("--disable-dev-shm-usage")
             
-            service = ChromeService(ChromeDriverManager().install())
-            driver = webdriver.Chrome(service=service, options=chrome_options)
+            # Always use these settings in container environments
+            if is_container or headless:
+                chrome_options.add_argument("--headless=new")  # Updated headless argument
+                chrome_options.add_argument("--disable-gpu")
+                chrome_options.add_argument("--no-sandbox")
+                chrome_options.add_argument("--disable-dev-shm-usage")
+            
+            chrome_options.add_argument("--window-size=1920,1080")
+            chrome_options.add_argument("--disable-extensions")
+            chrome_options.add_argument("--disable-infobars")
+            
+            # Add user agent to avoid detection
+            chrome_options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36")
+            
+            try:
+                # First try using the ChromeDriverManager
+                service = ChromeService(ChromeDriverManager().install())
+                driver = webdriver.Chrome(service=service, options=chrome_options)
+            except Exception as cm_error:
+                logger.warning(f"ChromeDriverManager failed: {cm_error}")
+                
+                # Fallback to system ChromeDriver in Docker/Railway environments
+                if is_container:
+                    logger.info("Trying with system ChromeDriver")
+                    driver = webdriver.Chrome(options=chrome_options)
         
         # Setup Firefox browser
         elif browser_type.lower() == "firefox":
+            logger.info("Setting up Firefox WebDriver")
             firefox_options = FirefoxOptions()
-            if headless:
+            
+            if is_container or headless:
                 firefox_options.add_argument("--headless")
-            service = FirefoxService(GeckoDriverManager().install())
-            driver = webdriver.Firefox(service=service, options=firefox_options)
+                firefox_options.add_argument("--width=1920")
+                firefox_options.add_argument("--height=1080")
+            
+            try:
+                service = FirefoxService(GeckoDriverManager().install())
+                driver = webdriver.Firefox(service=service, options=firefox_options)
+            except Exception as ff_error:
+                logger.warning(f"GeckoDriverManager failed: {ff_error}")
+                if is_container:
+                    driver = webdriver.Firefox(options=firefox_options)
         
         # Setup Edge browser
         elif browser_type.lower() == "edge":
+            logger.info("Setting up Edge WebDriver")
             edge_options = EdgeOptions()
-            if headless:
+            
+            if is_container or headless:
                 edge_options.add_argument("--headless")
-            service = EdgeService(EdgeChromiumDriverManager().install())
-            driver = webdriver.Edge(service=service, options=edge_options)
+                edge_options.add_argument("--disable-gpu")
+            
+            try:
+                service = EdgeService(EdgeChromiumDriverManager().install())
+                driver = webdriver.Edge(service=service, options=edge_options)
+            except Exception as edge_error:
+                logger.warning(f"EdgeDriverManager failed: {edge_error}")
+                # Edge is less likely to be in container environments
         
         # Default to Chrome if browser type not recognized
         else:
-            print(f"⚠️ Browser type '{browser_type}' not recognized. Using Chrome.")
-            chrome_options = ChromeOptions()
-            if headless:
-                chrome_options.add_argument("--headless")
-            chrome_options.add_argument("--window-size=1920,1080")
-            chrome_options.add_argument("--disable-gpu")
-            chrome_options.add_argument("--no-sandbox")
-            chrome_options.add_argument("--disable-dev-shm-usage")
-
-            service = ChromeService(ChromeDriverManager().install())
-            driver = webdriver.Chrome(service=service, options=chrome_options)
+            logger.warning(f"Browser type '{browser_type}' not recognized. Using Chrome.")
+            return setup_driver(website_url, "chrome", headless)
+        
+        # Set page load timeout
+        driver.set_page_load_timeout(30)
         
         # Use the provided URL or default if none is provided
         url = website_url if website_url else "https://gdgcmarwadiuniversity.tech/admin/login.php"
+        logger.info(f"Opening URL: {url}")
         driver.get(url)
         
         # Set an implicit wait to handle dynamic elements
         driver.implicitly_wait(10)
         
+        logger.info(f"Successfully set up {browser_type} driver")
         return driver
-
+    
     except Exception as e:
-        print(f"❌ Error setting up {browser_type} driver: {str(e)}")
+        logger.error(f"❌ Error setting up {browser_type} driver: {str(e)}")
         if driver:
             driver.quit()
         return None
-
-
-# ✅ Logout Function (Enhanced)
-def logout(driver, logout_url=None):
-    try:
-        # Try to find and click logout button
-        logout_elements = driver.find_elements(By.XPATH, "//a[contains(text(), 'Logout') or contains(text(), 'Log out')]")
-        
-        if logout_elements:
-            logout_elements[0].click()
-            time.sleep(1)
-            return True
-
-        # If provided a specific logout URL, navigate there
-        if logout_url:
-            driver.get(logout_url)
-            time.sleep(1)
-            return True
-            
-        # If no logout button found and no URL provided, go back to login page
-        driver.get(driver.current_url)  # Just refresh the page
-        time.sleep(1)
-        return True
-
-    except Exception as e:
-        print(f"❌ Logout Error: {str(e)}")
-        # Just refresh current page
-        driver.get(driver.current_url)
-        time.sleep(1)
-        return False
 
 
 # ✅ Run Individual Test Case with Enhanced Element Finding
