@@ -1,2 +1,2 @@
 id,description,website_url,username,password,username_field,password_field,submit_button,success_indicators,logout_url,expected,browser,actual_result
-tc101,login,https://practicetestautomation.com/practice-test-login/,student,Password123,username,password,submit,"dashboard,home,profile,welcome,index",,Success,chrome,Success
+tc102,login,https://practicetestautomation.com/practice-test-login/,student,******,username,password,submit,"dashboard,home,profile,welcome,index",,Success,chrome,Failed
