@@ -115,8 +115,9 @@ def get_report_filename():
 # ✅ Setup Selenium WebDriver with Cross-Browser Support and Custom URL
 def setup_driver(website_url=None, browser_type="chrome", headless=False):
     driver = None
-
+    
     try:
+        # Setup Chrome browser
         if browser_type.lower() == "chrome":
             chrome_options = ChromeOptions()
             if headless:
@@ -125,24 +126,27 @@ def setup_driver(website_url=None, browser_type="chrome", headless=False):
             chrome_options.add_argument("--disable-gpu")
             chrome_options.add_argument("--no-sandbox")
             chrome_options.add_argument("--disable-dev-shm-usage")
-
+            
             service = ChromeService(ChromeDriverManager().install())
             driver = webdriver.Chrome(service=service, options=chrome_options)
-
+        
+        # Setup Firefox browser
         elif browser_type.lower() == "firefox":
             firefox_options = FirefoxOptions()
             if headless:
                 firefox_options.add_argument("--headless")
             service = FirefoxService(GeckoDriverManager().install())
             driver = webdriver.Firefox(service=service, options=firefox_options)
-
+        
+        # Setup Edge browser
         elif browser_type.lower() == "edge":
             edge_options = EdgeOptions()
             if headless:
                 edge_options.add_argument("--headless")
             service = EdgeService(EdgeChromiumDriverManager().install())
             driver = webdriver.Edge(service=service, options=edge_options)
-
+        
+        # Default to Chrome if browser type not recognized
         else:
             print(f"⚠️ Browser type '{browser_type}' not recognized. Using Chrome.")
             chrome_options = ChromeOptions()
@@ -155,10 +159,14 @@ def setup_driver(website_url=None, browser_type="chrome", headless=False):
 
             service = ChromeService(ChromeDriverManager().install())
             driver = webdriver.Chrome(service=service, options=chrome_options)
-
+        
+        # Use the provided URL or default if none is provided
         url = website_url if website_url else "https://gdgcmarwadiuniversity.tech/admin/login.php"
         driver.get(url)
+        
+        # Set an implicit wait to handle dynamic elements
         driver.implicitly_wait(10)
+        
         return driver
 
     except Exception as e:
