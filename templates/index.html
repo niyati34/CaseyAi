@@ -93,23 +93,25 @@
   }
   
   .grok-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150vh;
-    opacity: 0.06;
-    z-index: 0;
-    font-size: 650px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    letter-spacing: -30px;
-    filter: blur(1px);
-    color: #000;
-  }
-  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150vh;
+  opacity: 0.06;
+  z-index: 0;
+  font-size: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  letter-spacing: -30px;
+  filter: blur(1px);
+  color: #000;
+
+  pointer-events: none; /* 🔥 This fixes the issue */
+}
+
   .search-container {
     position: relative;
     z-index: 1;
@@ -843,7 +845,256 @@
       flex-direction: column;
       align-items: center;
     }
+    
   }
+  .multi-step-form {
+  max-width: 480px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  border-radius: 12px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+.multi-step-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.multi-step-form input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f9f9f9;
+  color: #111;
+  transition: all 0.2s ease;
+}
+
+.multi-step-form input:focus {
+  outline: none;
+  border-color: #666;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(100, 100, 100, 0.15);
+}
+
+.multi-step-form .form-step {
+  display: none;
+  animation: slideInRight 0.4s ease-in-out;
+}
+
+.multi-step-form .form-step.active {
+  display: block;
+}
+
+.multi-step-form .next-btn,
+.multi-step-form .submit-btn {
+  background-color: #1e1e1e;
+  color: white;
+  border: none;
+  padding: 11px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.multi-step-form .next-btn:hover,
+.multi-step-form .submit-btn:hover {
+  background-color: #3c3c3c;
+}
+
+.multi-step-form .loading {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.multi-step-form .spinner {
+  border: 4px solid #eaeaea;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 12px;
+}
+
+.result-title {
+  margin-top: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+}
+
+#result {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 16px;
+  color: #333;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* Team Section */
+.team-section {
+  background-color: #f9f9f9;
+  padding: 80px 5%;
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.team-member {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.member-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.team-member:hover .member-image img {
+  transform: scale(1.05);
+}
+
+.member-name {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.member-role {
+  font-size: 14px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.social-links {
+  margin-top: 15px;
+}
+
+.linkedin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: #0077b5;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.linkedin-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Newsletter section */
+.newsletter-section {
+  background-color: #f0f0f0;
+  padding: 80px 5%;
+  text-align: center;
+}
+
+.newsletter-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.newsletter-form {
+  display: flex;
+  margin-top: 30px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 15px 20px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.newsletter-button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 0 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.newsletter-button:hover {
+  background-color: #555;
+}
+
+
+
   </style>
 
 </head>
@@ -864,31 +1115,45 @@
       <!-- <a href="/dashboard">CAREERS</a> -->
       <!-- <a href="/dashboard">NEWS</a> -->
     </div>
-    <button class="try-button"><a href="./requirements.html">Try Cassey</a></button>
+    <button class="try-button">      <a href="{{ url_for('dashboard') }}">Try Cassey</a></button>
   </header>
   
   <!-- Hero Section -->
   <div class="hero">
     <div class="grok-bg">Casey</div>
     
-    <div class="search-container">
-      <h2>Enter Website Details</h2>
-      <form id="testForm">
-          <label for="url">Website URL:</label>
-          <input type="text" id="url" name="url" required><br><br>
-  
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required><br><br>
-  
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required><br><br>
-  
-          <button type="submit">Run Test</button>
+    <div class="multi-step-form">
+      <h2 class="form-title">Quick Website Test</h2>
+    
+      <form id="stepForm">
+        <div class="form-step active" data-step="1">
+          <label for="url">Website URL</label>
+          <input type="text" id="url" placeholder="e.g. https://example.com" required>
+          <button type="button" class="next-btn">Next →</button>
+        </div>
+    
+        <div class="form-step" data-step="2">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter your username" required>
+          <button type="button" class="next-btn">Next →</button>
+        </div>
+    
+        <div class="form-step" data-step="3">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required>
+          <button type="submit" class="submit-btn">Run Test</button>
+        </div>
       </form>
-  
-      <h3>Test Result:</h3>
+    
+      <div class="loading" id="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Running test, please wait...</p>
+      </div>
+    
+      <h3 class="result-title">Test Result</h3>
       <pre id="result"></pre>
     </div>
+    
     
     <div class="hero-text">
       <p>Meet Casey: Your Ultimate Companion for Effortless Software Testing – Where Quality Meets Simplicity!</p>
@@ -1006,7 +1271,59 @@
       </div>
     </div>
   </section>
-  
+   <!-- Team Section -->
+   <section id="team" class="team-section">
+    <span class="section-tag">[ Developed By ]</span>
+    
+    <h2 class="section-title">Meet Our Team</h2>
+    
+    <div class="team-members">
+      <div class="team-member">
+        <div class="member-image">
+          <img src="/static/images/dhairya.jpeg" alt="Dhairya Dave" />
+        </div>
+        <h3 class="member-name">Dhairya Dave</h3>
+        <p class="member-role">DevOps Engineer</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/dhairya-dave-bab38626a/" target="_blank" class="linkedin-icon">in</a>
+        </div>
+      </div>
+      
+      <div class="team-member">
+        <div class="member-image">
+          <img src="/static/images/niyati.jpg" alt="Niyati Raiyani" />
+        </div>
+        <h3 class="member-name">Niyati Raiyani</h3>
+        <p class="member-role">Frontend Developer</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/niyati-raiyani/" target="_blank" class="linkedin-icon">in</a>
+        </div>
+      </div>
+      
+      <div class="team-member">
+        <div class="member-image">
+          <img src="/static/images/dev.jpg" alt="Dev Tanna" />
+        </div>
+        <h3 class="member-name">Dev Tanna</h3>
+        <p class="member-role">Backend Developer</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/devtanna09/" target="_blank" class="linkedin-icon">in</a>
+        </div>
+      </div>
+      
+      <div class="team-member">
+        <div class="member-image">
+          <img src="/static/images/naishad.jpg" alt="Naishad Gohel" />
+        </div>
+        <h3 class="member-name">Naishad Gohel</h3>
+        <p class="member-role">UI/UX Designer</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/naishad01/" target="_blank" class="linkedin-icon">in</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer Section  -->
 
   <div class="footer">
@@ -1207,22 +1524,55 @@
     });
 </script>
 <script>
-  document.getElementById("testForm").addEventListener("submit", async function(event) {
-      event.preventDefault();
+  const form = document.getElementById('stepForm');
+  const steps = document.querySelectorAll('.form-step');
+  let currentStep = 0;
 
-      const url = document.getElementById("url").value;
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+  const showStep = (index) => {
+    steps.forEach((step, i) => {
+      step.classList.toggle('active', i === index);
+    });
+  };
 
+  document.querySelectorAll('.next-btn').forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      const input = steps[index].querySelector('input');
+      if (input.checkValidity()) {
+        currentStep++;
+        showStep(currentStep);
+      } else {
+        input.reportValidity();
+      }
+    });
+  });
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    document.getElementById("result").textContent = ""; // Clear previous result
+    document.getElementById("loading").style.display = "block"; // Show loader
+
+    const url = document.getElementById("url").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    try {
       const response = await fetch("/run_test", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url, username, password })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url, username, password }),
       });
 
       const result = await response.text();
       document.getElementById("result").textContent = result;
+    } catch (error) {
+      document.getElementById("result").textContent = "Error running test.";
+    } finally {
+      document.getElementById("loading").style.display = "none"; // Hide loader
+    }
   });
+
+  showStep(currentStep); // Initial display
 </script>
+
 </body>
 </html>

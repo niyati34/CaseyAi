@@ -47,15 +47,18 @@ def run_test():
     password = data["password"]
 
     try:
-        subprocess.run([
+        result = subprocess.run([
             "python", "fetch.py",
             "--url", url,
             "--username", username,
             "--password", password
-        ], capture_output=True, text=True, check=True,encoding="utf-8")
-        return "Test Success"  # Explicitly return success only if no error occurs
-    except subprocess.CalledProcessError as e:
-         return f"Test Failed: {e.stderr}"  # Indicate failure properly
+        ])
+
+        return "✅ Test Passed" if result.returncode == 0 else "❌ Test Failed"
+
+    except Exception as e:
+        return f"⚠️ Error running test: {str(e)}"
+
     
 # Define file paths and configurations
 test_cases_file = "test_cases.csv"
@@ -66,43 +69,54 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 def load_data():
-    """Load and process test case data from CSV"""
     if not os.path.exists(test_cases_file):
-        return {"total": 0, "passed": 0, "failed": 0, "details": []}
+        return {
+            "total": 0,
+            "passed": 0,
+            "failed": 0,
+            "details": [],
+            "browser_count": {},
+            "description_coverage": {}
+        }
 
     df = pd.read_csv(test_cases_file)
-
-    # Convert actual_result to lowercase for consistency
     df["actual_result"] = df["actual_result"].str.lower()
 
     total_tests = len(df)
     passed_tests = len(df[df["actual_result"] == "success"])
     failed_tests = len(df[df["actual_result"] == "failed"])
-
-    details = df[["id", "description", "actual_result"]].to_dict(orient="records")
+    browser_count = df["browser"].value_counts().to_dict() if "browser" in df.columns else {}
+    description_coverage = df["description"].value_counts().to_dict()
 
     return {
         "total": total_tests,
         "passed": passed_tests,
         "failed": failed_tests,
-        "details": details
+        "details": df[["id", "description", "actual_result"]].to_dict(orient="records"),
+        "browser_count": browser_count,
+        "description_coverage": description_coverage
     }
-
-
-
-
 @app.route('/get_chart_data')
 def get_chart_data():
-    # Simulated dynamic test data
-    test_data = {
-        'doughnut': [70, 30],  # Passed, Failed
-        'gauge': 70,  # Percentage of passed tests
-        'area': {
-            'dates': ["Mar 1", "Mar 5", "Mar 10", "Mar 15", "Mar 20", "Mar 25", "Mar 30"],
-            'tests_executed': [10, 25, 35, 50, 65, 80, 100]
-        }
+    data = load_data()
+    progress = round((data["passed"] / data["total"]) * 100, 2) if data["total"] > 0 else 0
+
+    area_chart_data = {
+        "dates": ["Apr 1", "Apr 5", "Apr 10", "Apr 15", "Apr 20"],
+        "tests_executed": [10, 25, 40, 60, data["total"]]
     }
-    return jsonify(test_data)  # Send JSON data to frontend
+
+    return jsonify({
+        "passed": data["passed"],
+        "failed": data["failed"],
+        "total": data["total"],
+        "progress": progress,
+        "dates": area_chart_data["dates"],
+        "tests_executed": area_chart_data["tests_executed"],
+        "browser_count": data["browser_count"],
+        "description_coverage": data["description_coverage"]
+    })
+
 
 # --------------------- TEST AUTOMATION FUNCTIONS ---------------------
 

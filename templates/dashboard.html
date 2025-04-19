@@ -11,10 +11,200 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
   
     
          <style>
-
+            .tcad-container {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #111827;
+      background-color: #f9fafb;
+      padding: 24px;
+      border-radius: 12px;
+    }
+    
+    .tcad-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .tcad-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #7e22ce;
+      margin: 0;
+    }
+    
+    .tcad-subtitle {
+      color: #374151;
+      font-size: 14px;
+      margin: 0;
+      margin-top: 5px;
+    }
+    
+    .tcad-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    
+    .tcad-stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid #e5e7eb;
+    }
+    
+    .tcad-stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(126, 34, 206, 0.15);
+    }
+    
+    .tcad-stat-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .tcad-stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    .tcad-value-total { color: #9333ea; }
+    .tcad-value-passed { color: #16a34a; }
+    .tcad-value-failed { color: #dc2626; }
+    .tcad-value-rate { color: #7e22ce; }
+    
+    .tcad-charts-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    
+    .tcad-chart-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e5e7eb;
+    }
+    
+    .tcad-chart-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #374151;
+      margin-top: 0;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    
+    .tcad-chart-container {
+      position: relative;
+      height: 220px;
+    }
+    
+    .tcad-full-chart {
+      margin-bottom: 28px;
+    }
+    
+    .tcad-icon {
+      margin-right: 12px;
+      background-color: rgba(147, 51, 234, 0.1);
+      padding: 10px;
+      border-radius: 10px;
+      color: #9333ea;
+    }
+    
+    .tcad-coverage-container {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e5e7eb;
+      margin-bottom: 28px;
+    }
+    
+    .tcad-coverage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .tcad-coverage-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #7e22ce;
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .tcad-coverage-title i {
+      margin-right: 10px;
+      color: #9333ea;
+    }
+    
+    .tcad-coverage-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .tcad-legend-item {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: #374151;
+    }
+    
+    .tcad-legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      margin-right: 6px;
+    }
+    
+    .tcad-coverage-chart {
+      height: 300px;
+      position: relative;
+    }
+    
+    .tcad-stat-icon {
+      margin-right: 8px;
+      color: #9333ea;
+      font-size: 16px;
+    }
+    
+    @media (max-width: 1024px) {
+      .tcad-charts-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .tcad-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .tcad-charts-row {
+        grid-template-columns: 1fr;
+      }
+    }
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -288,6 +478,12 @@
                             Test Case Generation
                         </button>
                     </li>
+                    <!-- New Analysis Tab -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis" type="button" role="tab" aria-controls="analysis" aria-selected="false">
+                        Analysis
+                        </button>
+                    </li>
                 </ul>
             </div>
 
@@ -296,57 +492,7 @@
                 <div class="tab-pane fade show active" id="test-automation" role="tabpanel" aria-labelledby="test-automation-tab">
                     <div class="mb-4">
                        <h2 class="h4 mb-3">Test Automation Management</h2>
-                        
-
-    <!-- Doughnut & Gauge Charts (Side by Side) -->
-    <div class="chart-container">
-        <div class="chart-box">
-            <h3>Pass vs Fail</h3>
-            <canvas id="doughnutChart"></canvas>
-        </div>
-        <div class="chart-box">
-            <h3>Test Completion</h3>
-            <canvas id="gaugeChart" width="400" height="200"></canvas>
-        </div>
-    </div>
-
-    <!-- Area Chart (Below) -->
-    
-
-    <script>
-        async function fetchData() {
-            const response = await fetch('/get_chart_data');
-            const data = await response.json();
-            
-            // Doughnut Chart (Pass vs Fail)
-            new Chart(document.getElementById('doughnutChart'), {
-                type: 'doughnut',
-                data: { 
-                    labels: ["Passed", "Failed"],
-                    datasets: [{
-                        data: data.doughnut,
-                        backgroundColor:  ["#9333ea","lightgrey"]
-                    }]
-                }
-            });
-
-            // Gauge Chart (Test Completion Percentage)
-            var gauge = new Gauge(document.getElementById("gaugeChart")).setOptions({
-                angle: 0, lineWidth: 0.2, radiusScale: 1, pointer: { length: 0.6, strokeWidth: 0.03 },
-                limitMax: false, limitMin: false, colorStart: "#9333ea", colorStop: "#7e22ce",
-                strokeColor: "#E0E0E0", highDpiSupport: true
-            });
-            gauge.maxValue = 100;
-            gauge.setMinValue(0);
-            gauge.animationSpeed = 32;
-            gauge.set(data.gauge);
-
-            // Area Chart (Test Execution Over Time)
-            
-        }
-        
-        fetchData();
-    </script>
+                 
                         <div class="d-flex justify-content-end mb-3">
                             <a href="{{ url_for('run_tests') }}" class="btn btn-success me-2">
                                 <i class="fas fa-play me-1"></i> Run All Tests
@@ -604,6 +750,356 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="tab-pane fade" id="analysis" role="tabpanel" aria-labelledby="analysis-tab">
+                        
+                        <!-- Summary Stats -->
+                        <div class="tcad-container">
+                            <div class="tcad-header">
+                              <div class="tcad-icon">
+                                <i class="fas fa-chart-line"></i>
+                              </div>
+                              <div>
+                                <h1 class="tcad-title">Test Case Analysis</h1>
+                                <p class="tcad-subtitle">Performance metrics and test execution statistics</p>
+                              </div>
+                            </div>
+                            
+                            <!-- Summary Stats -->
+                            <div class="tcad-stats-grid">
+                              <div class="tcad-stat-card">
+                                <p class="tcad-stat-label"><i class="fas fa-tasks tcad-stat-icon"></i>Total Tests</p>
+                                <h2 class="tcad-stat-value tcad-value-total" id="tcad-totalTests">0</h2>
+                              </div>
+                              <div class="tcad-stat-card">
+                                <p class="tcad-stat-label"><i class="fas fa-check-circle tcad-stat-icon"></i>Passed</p>
+                                <h2 class="tcad-stat-value tcad-value-passed" id="tcad-passedTests">0</h2>
+                              </div>
+                              <div class="tcad-stat-card">
+                                <p class="tcad-stat-label"><i class="fas fa-times-circle tcad-stat-icon"></i>Failed</p>
+                                <h2 class="tcad-stat-value tcad-value-failed" id="tcad-failedTests">0</h2>
+                              </div>
+                              <div class="tcad-stat-card">
+                                <p class="tcad-stat-label"><i class="fas fa-percentage tcad-stat-icon"></i>Pass Rate</p>
+                                <h2 class="tcad-stat-value tcad-value-rate" id="tcad-passRate">0%</h2>
+                              </div>
+                            </div>
+                            
+                            <!-- Chart Row -->
+                            <div class="tcad-charts-row">
+                              <div class="tcad-chart-card">
+                                <h3 class="tcad-chart-title">Passed vs Failed</h3>
+                                <div class="tcad-chart-container">
+                                  <canvas id="tcad-donutChart"></canvas>
+                                </div>
+                              </div>
+                              <div class="tcad-chart-card">
+                                <h3 class="tcad-chart-title">Test Completion</h3>
+                                <div class="tcad-chart-container">
+                                  <canvas id="tcad-gaugeChart"></canvas>
+                                </div>
+                              </div>
+                              <div class="tcad-chart-card">
+                                <h3 class="tcad-chart-title">Tests by Browser</h3>
+                                <div class="tcad-chart-container">
+                                  <canvas id="tcad-browserChart"></canvas>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <!-- Full Width Charts -->
+                            <div class="tcad-chart-card tcad-full-chart">
+                              <h3 class="tcad-chart-title">Test Execution Over Time</h3>
+                              <div class="tcad-chart-container">
+                                <canvas id="tcad-areaChart"></canvas>
+                              </div>
+                            </div>
+                            
+                            <!-- Enhanced Coverage Section -->
+                            <div class="tcad-coverage-container">
+                              <div class="tcad-coverage-header">
+                                <h3 class="tcad-coverage-title">
+                                  <i class="fas fa-layer-group"></i>
+                                  Test Coverage by Description
+                                </h3>
+                                <button id="tcad-toggle-view" style="background: #9333ea; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500;">
+                                  Toggle View
+                                </button>
+                              </div>
+                              
+                              <div class="tcad-coverage-legend" id="tcad-coverage-legend">
+                                <!-- Legend will be populated dynamically -->
+                              </div>
+                              
+                              <div class="tcad-coverage-chart">
+                                <canvas id="tcad-coverageBarChart"></canvas>
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                              // Theme colors
+                              const themeColors = [
+                                '#9333ea', // Purple
+                                '#7e22ce', // Dark Purple
+                                '#6d28d9', // Indigo
+                                '#8b5cf6', // Violet
+                                '#a855f7', // Pink Purple
+                                '#c026d3', // Fuchsia
+                                '#4338ca', // Deep indigo
+                                '#4f46e5'  // Blue indigo
+                              ];
+                              
+                              let isHorizontalBar = true;
+                              let coverageChart; // Reference to the coverage chart for updating
+                              
+                              fetch("/get_chart_data")
+                                .then(response => response.json())
+                                .then(data => {
+                                  // Update summary stats
+                                  document.getElementById("tcad-totalTests").textContent = data.total;
+                                  document.getElementById("tcad-passedTests").textContent = data.passed;
+                                  document.getElementById("tcad-failedTests").textContent = data.failed;
+                                  document.getElementById("tcad-passRate").textContent = data.progress + "%";
+                        
+                                  // Charts configuration
+                                  const chartOptions = {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    plugins: {
+                                      legend: {
+                                        position: 'bottom',
+                                        labels: {
+                                          boxWidth: 12,
+                                          padding: 15,
+                                          font: {
+                                            size: 11
+                                          }
+                                        }
+                                      },
+                                      tooltip: {
+                                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                                        titleColor: '#111827',
+                                        bodyColor: '#374151',
+                                        borderColor: '#e5e7eb',
+                                        borderWidth: 1,
+                                        padding: 12,
+                                        boxWidth: 8,
+                                        boxHeight: 8,
+                                        usePointStyle: true,
+                                        cornerRadius: 6,
+                                        titleFont: {
+                                          weight: 'bold'
+                                        }
+                                      }
+                                    }
+                                  };
+                        
+                                  // Donut Chart (Passed vs Failed)
+                                  new Chart(document.getElementById("tcad-donutChart"), {
+                                    type: "doughnut",
+                                    data: {
+                                      labels: ["Passed", "Failed"],
+                                      datasets: [{
+                                        data: [data.passed, data.failed],
+                                        backgroundColor: ["#16a34a", "#dc2626"],
+                                        borderWidth: 1,
+                                        borderColor: '#fff'
+                                      }]
+                                    },
+                                    options: {
+                                      ...chartOptions,
+                                      cutout: "70%"
+                                    }
+                                  });
+                        
+                                  // Gauge Chart (Completion)
+                                  new Chart(document.getElementById("tcad-gaugeChart"), {
+                                    type: "doughnut",
+                                    data: {
+                                      labels: ["Completed", "Remaining"],
+                                      datasets: [{
+                                        data: [data.progress, 100 - data.progress],
+                                        backgroundColor: ["#9333ea", "#e5e7eb"],
+                                        borderWidth: 0
+                                      }]
+                                    },
+                                    options: {
+                                      ...chartOptions,
+                                      cutout: "80%",
+                                      rotation: -90,
+                                      circumference: 180,
+                                      plugins: {
+                                        legend: { display: false },
+                                        tooltip: chartOptions.plugins.tooltip
+                                      }
+                                    }
+                                  });
+                        
+                                  // Bar Chart (Browsers)
+                                  new Chart(document.getElementById("tcad-browserChart"), {
+                                    type: "bar",
+                                    data: {
+                                      labels: Object.keys(data.browser_count),
+                                      datasets: [{
+                                        label: "Tests",
+                                        data: Object.values(data.browser_count),
+                                        backgroundColor: "#7e22ce",
+                                        borderRadius: 6
+                                      }]
+                                    },
+                                    options: {
+                                      ...chartOptions,
+                                      plugins: {
+                                        legend: { display: false },
+                                        tooltip: chartOptions.plugins.tooltip
+                                      },
+                                      scales: {
+                                        y: {
+                                          beginAtZero: true,
+                                          grid: {
+                                            color: 'rgba(0, 0, 0, 0.05)'
+                                          }
+                                        },
+                                        x: {
+                                          grid: {
+                                            display: false
+                                          }
+                                        }
+                                      }
+                                    }
+                                  });
+                        
+                                  // Area Chart (Time Series)
+                                  new Chart(document.getElementById("tcad-areaChart"), {
+                                    type: "line",
+                                    data: {
+                                      labels: data.dates,
+                                      datasets: [{
+                                        label: "Tests Executed",
+                                        data: data.tests_executed,
+                                        backgroundColor: "rgba(147, 51, 234, 0.2)",
+                                        borderColor: "#9333ea",
+                                        pointBackgroundColor: "#9333ea",
+                                        pointBorderColor: "#fff",
+                                        pointRadius: 4,
+                                        pointHoverRadius: 6,
+                                        fill: true,
+                                        tension: 0.3
+                                      }]
+                                    },
+                                    options: {
+                                      ...chartOptions,
+                                      scales: {
+                                        y: {
+                                          beginAtZero: true,
+                                          grid: {
+                                            color: 'rgba(0, 0, 0, 0.05)'
+                                          }
+                                        },
+                                        x: {
+                                          grid: {
+                                            display: false
+                                          }
+                                        }
+                                      }
+                                    }
+                                  });
+                        
+                                  // Create dynamic coverage data
+                                  const coverageLabels = Object.keys(data.description_coverage);
+                                  const coverageData = Object.values(data.description_coverage);
+                                  
+                                  // Create colored datasets for coverage
+                                  const backgroundColors = coverageLabels.map((_, i) => themeColors[i % themeColors.length]);
+                                  
+                                  // Create legend
+                                  const legendContainer = document.getElementById('tcad-coverage-legend');
+                                  coverageLabels.forEach((label, i) => {
+                                    const legendItem = document.createElement('div');
+                                    legendItem.className = 'tcad-legend-item';
+                                    
+                                    const colorSquare = document.createElement('div');
+                                    colorSquare.className = 'tcad-legend-color';
+                                    colorSquare.style.backgroundColor = backgroundColors[i];
+                                    
+                                    const labelText = document.createElement('span');
+                                    labelText.textContent = label;
+                                    
+                                    legendItem.appendChild(colorSquare);
+                                    legendItem.appendChild(labelText);
+                                    legendContainer.appendChild(legendItem);
+                                  });
+                                  
+                                  // Function to create coverage chart
+                                  function createCoverageChart(horizontal) {
+                                    if (coverageChart) {
+                                      coverageChart.destroy();
+                                    }
+                                    
+                                    coverageChart = new Chart(document.getElementById("tcad-coverageBarChart"), {
+                                      type: "bar",
+                                      data: {
+                                        labels: coverageLabels,
+                                        datasets: [{
+                                          label: "Test Count",
+                                          data: coverageData,
+                                          backgroundColor: backgroundColors,
+                                          borderRadius: 6,
+                                          maxBarThickness: horizontal ? 28 : 50
+                                        }]
+                                      },
+                                      options: {
+                                        ...chartOptions,
+                                        indexAxis: horizontal ? "y" : "x",
+                                        plugins: {
+                                          legend: { display: false },
+                                          tooltip: {
+                                            ...chartOptions.plugins.tooltip,
+                                            callbacks: {
+                                              title: function(context) {
+                                                return context[0].label;
+                                              },
+                                              label: function(context) {
+                                                return `Tests: ${context.raw}`;
+                                              }
+                                            }
+                                          }
+                                        },
+                                        scales: {
+                                          x: {
+                                            beginAtZero: true,
+                                            grid: {
+                                              color: 'rgba(0, 0, 0, 0.05)'
+                                            }
+                                          },
+                                          y: {
+                                            grid: {
+                                              color: horizontal ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0.05)'
+                                            }
+                                          }
+                                        },
+                                        animation: {
+                                          duration: 500,
+                                          easing: 'easeOutQuart'
+                                        }
+                                      }
+                                    });
+                                  }
+                                  
+                                  // Initialize coverage chart
+                                  createCoverageChart(isHorizontalBar);
+                                  
+                                  // Toggle view button
+                                  document.getElementById('tcad-toggle-view').addEventListener('click', function() {
+                                    isHorizontalBar = !isHorizontalBar;
+                                    createCoverageChart(isHorizontalBar);
+                                  });
+                                });
+                            });
+                          </script>
+                  </div>
             </div>
         </div>
     </div>

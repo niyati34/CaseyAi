@@ -158,29 +158,31 @@ like The test case should:
 - Import all necessary Selenium libraries.
 - for sucsessfull indicators generaate it as website type try multiple combinations
 - Do NOT include explanations, comments, or additional text outside the Python code.
+At the end of the script, include this line:
+
+    test_result = "✅"  # if test passed
+
+or
+
+    test_result = "❌"  # if test failed
+
+This is required so we can track the result in another script.
+- Don't include any extra print or explanation
 
 """
-
-# Generate Test Case using Gemini AI
 response = model.generate_content(prompt)
 generated_code = response.text
-generated_code = re.sub(r"```python|```", "", generated_code).strip()
+generated_code = re.sub(r"```(?:python)?", "", generated_code).replace("```", "").strip()
 
-# ✅ Save the Generated Test Case
-selenium_script = "generated_test.py"
-with open(selenium_script, "w", encoding="utf-8") as file:
-    file.write(generated_code)
 
-print(f"✅ Selenium test saved to {selenium_script}")
 
-# 🏃 Run the Generated Selenium Script
 try:
-    subprocess.run(["python", selenium_script], check=True)
-except subprocess.CalledProcessError as e:
-    print(f"❌ Test Execution Failed: {e}")
-
-# 🛑 Close Browser Again (just in case)
-try:
-    driver.quit()
-except:
-    pass
+    exec_globals = {}
+    exec(generated_code, exec_globals)
+    result = exec_globals.get("test_result", "❌")  # default to failure if not set
+    if result == "✅":
+        sys.exit(0)
+    else:
+        sys.exit(1)
+except Exception as e:
+    sys.exit(1)
