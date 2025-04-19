@@ -1098,4 +1098,4 @@ if __name__ == "__main__":
                               "browser", "actual_result"]).to_csv(test_cases_file, dashboard=False)
     
     # Run the app
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
