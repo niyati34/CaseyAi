@@ -21,6 +21,9 @@ from docx import Document
 import google.generativeai as genai
 from dotenv import load_dotenv
 import subprocess
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.edge.service import Service as EdgeService
 
 
 
@@ -110,11 +113,10 @@ def get_report_filename():
 
 
 # ✅ Setup Selenium WebDriver with Cross-Browser Support and Custom URL
-def setup_driver(website_url=None, browser_type="chrome", headless=True):
+def setup_driver(website_url=None, browser_type="chrome", headless=False):
     driver = None
-    
+
     try:
-        # Setup Chrome browser
         if browser_type.lower() == "chrome":
             chrome_options = ChromeOptions()
             if headless:
@@ -123,48 +125,47 @@ def setup_driver(website_url=None, browser_type="chrome", headless=True):
             chrome_options.add_argument("--disable-gpu")
             chrome_options.add_argument("--no-sandbox")
             chrome_options.add_argument("--disable-dev-shm-usage")
-            driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-        
-        # Setup Firefox browser
+
+            service = ChromeService(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=chrome_options)
+
         elif browser_type.lower() == "firefox":
             firefox_options = FirefoxOptions()
             if headless:
                 firefox_options.add_argument("--headless")
-            driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=firefox_options)
-        
-        # Setup Edge browser
+            service = FirefoxService(GeckoDriverManager().install())
+            driver = webdriver.Firefox(service=service, options=firefox_options)
+
         elif browser_type.lower() == "edge":
             edge_options = EdgeOptions()
             if headless:
                 edge_options.add_argument("--headless")
-            driver = webdriver.Edge(EdgeChromiumDriverManager().install(), options=edge_options)
-        
-        # Default to Chrome if browser type not recognized
+            service = EdgeService(EdgeChromiumDriverManager().install())
+            driver = webdriver.Edge(service=service, options=edge_options)
+
         else:
             print(f"⚠️ Browser type '{browser_type}' not recognized. Using Chrome.")
             chrome_options = ChromeOptions()
             if headless:
                 chrome_options.add_argument("--headless")
-            driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-        
-        # Use the provided URL or default if none is provided
+            chrome_options.add_argument("--window-size=1920,1080")
+            chrome_options.add_argument("--disable-gpu")
+            chrome_options.add_argument("--no-sandbox")
+            chrome_options.add_argument("--disable-dev-shm-usage")
+
+            service = ChromeService(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=chrome_options)
+
         url = website_url if website_url else "https://gdgcmarwadiuniversity.tech/admin/login.php"
         driver.get(url)
-        
-        # Set an implicit wait to handle dynamic elements
         driver.implicitly_wait(10)
-        
         return driver
-    
+
     except Exception as e:
         print(f"❌ Error setting up {browser_type} driver: {str(e)}")
         if driver:
             driver.quit()
-        # Fall back to basic Chrome setup without webdriver manager if there's an error
-        driver = webdriver.Chrome()
-        url = website_url if website_url else "https://gdgcmarwadiuniversity.tech/admin/login.php"
-        driver.get(url)
-        return driver
+        return None
 
 
 # ✅ Logout Function (Enhanced)
