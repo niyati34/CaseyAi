@@ -638,7 +638,8 @@ def run_tests():
     # Group test cases by browser
     browser_groups = {}
     for test in test_cases:
-        browser = test.get('browser', 'chrome').lower()
+        browser = str(test.get('browser', 'chrome')).lower()
+
         if browser not in browser_groups:
             browser_groups[browser] = []
         browser_groups[browser].append(test)
