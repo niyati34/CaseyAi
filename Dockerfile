@@ -36,10 +36,11 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 # Copy the entire project folder into /app
 COPY . .
 
-
+# Go into the folder where app.py exists
+WORKDIR /app/merged
 
 # Expose the port Flask uses
 EXPOSE 5000
 
 # Start Xvfb and then run the app
-CMD xvfb-run --server-args="-screen 0 1920x1080x24" python merged/app.py
+CMD xvfb-run --server-args="-screen 0 1920x1080x24" python app.py
