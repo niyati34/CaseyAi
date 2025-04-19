@@ -13,11 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire project folder into /app
 COPY . .
 
-# Move into the folder that contains app.py
+# Go into the folder where app.py exists
 WORKDIR /app/merged
 
-# Expose the port Flask or your app uses
+# Expose the port Flask uses
 EXPOSE 5000
 
-# Run the app
+# Start the app
 CMD ["python", "app.py"]
