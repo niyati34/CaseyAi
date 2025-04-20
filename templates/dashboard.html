@@ -16,16 +16,12 @@
   <meta name="language" content="English">
 
 
-  <title>Casey - Test Automation Dashboard</title>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <script src="https://cdn.jsdelivr.net/npm/chart .js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
-
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+    <title>Casey - Test Automation Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
 
@@ -255,258 +251,220 @@
       height: 300px;
     }
 
-    .area-container {
-      width: 80%;
-      margin: auto;
-      margin-bottom: 40px;
-      margin-top: 70px;
-    }
-
-    :root {
-      --primary-color: #9333ea;
-      --primary-hover: #7e22ce;
-      --light-bg: #f9fafb;
-      --card-border: #e5e7eb;
-      --header-color: #111827;
-      --text-color: #374151;
-    }
-
-    body {
-      background-color: var(--light-bg);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text-color);
-    }
-
-    .navbar {
-      background-color: white;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      padding: 0.75rem 1.5rem;
-    }
-
-    .navbar-brand {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--primary-color);
-    }
-
-    .nav-link {
-      color: #6b7280;
-      padding: 0.5rem 1rem;
-      font-weight: 500;
-    }
-
-    .nav-link:hover {
-      color: var(--primary-color);
-    }
-
-    .nav-link.active {
-      color: var(--primary-color);
-    }
-
-    .nav-icon {
-      margin-right: 0.5rem;
-    }
-
-    .page-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 0;
-    }
-
-    .page-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--header-color);
-      margin: 0;
-    }
-
-    .btn-primary {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
-    }
-
-    .bg-primary {
-      background-color: var(--primary-color) !important;
-      border-color: var(--primary-color);
-    }
-
-    .btn-primary:hover {
-      background-color: var(--primary-hover);
-      border-color: var(--primary-hover);
-    }
-
-    .btn-outline-primary {
-      color: var(--primary-color);
-      border-color: var(--primary-color);
-    }
-
-    .btn-outline-primary:hover {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
-    }
-
-    .card {
-      border: 1px solid var(--card-border);
-      border-radius: 0.5rem;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      margin-bottom: 1.5rem;
-    }
-
-    .card-header {
-      background-color: white;
-      border-bottom: 1px solid var(--card-border);
-      padding: 1rem 1.5rem;
-      font-weight: 600;
-    }
-
-    .tab-content {
-      background-color: #fff;
-      border-radius: 0.5rem;
-    }
-
-    .tabs-wrapper {
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .nav-tabs {
-      border-bottom: none;
-    }
-
-    .nav-tabs .nav-link {
-      border: none;
-      border-bottom: 2px solid transparent;
-      border-radius: 0;
-      padding: 1rem 1.5rem;
-      font-weight: 500;
-    }
-
-    .nav-tabs .nav-link.active {
-      border-bottom: 2px solid var(--primary-color);
-      color: var(--primary-color);
-      font-weight: 600;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 3rem;
-      color: #6b7280;
-    }
-
-    .form-control,
-    .form-select {
-      border: 1px solid #d1d5db;
-      padding: 0.5rem 0.75rem;
-      border-radius: 0.375rem;
-    }
-
-    .form-control:focus,
-    .form-select:focus {
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 0.25rem rgba(147, 51, 234, 0.25);
-    }
-
-    .form-label {
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-
-    .test-cases-card {
-      border-radius: 0.5rem;
-      overflow: hidden;
-    }
-
-    .btn-success {
-      background-color: #10b981;
-      border-color: #10b981;
-    }
-
-    .btn-success:hover {
-      background-color: #059669;
-      border-color: #059669;
-    }
-
-    .btn-danger {
-      background-color: #ef4444;
-      border-color: #ef4444;
-    }
-
-    .btn-danger:hover {
-      background-color: #dc2626;
-      border-color: #dc2626;
-    }
-
-    .badge.bg-success {
-      background-color: #10b981 !important;
-    }
-
-    .badge.bg-danger {
-      background-color: #ef4444 !important;
-    }
-
-    .badge.bg-secondary {
-      background-color: #6b7280 !important;
-    }
-
-    /* Security Warning Styles */
-    .security-warning {
-      background-color: #fabcf9;
-      border: 1px solid #e944ef;
-      border-radius: 1.3rem;
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: flex-start;
-    }
-
-    .security-warning-icon {
-      color: #cd26dc;
-      font-size: 1.5rem;
-      margin-right: 1rem;
-      flex-shrink: 0;
-    }
-
-    .security-warning-content {
-      flex: 1;
-    }
-
-    .security-warning-title {
-      font-weight: 600;
-      font-size: 1.125rem;
-      color: #b11cb9;
-      margin-bottom: 0.5rem;
-    }
-
-    .security-warning-text {
-      color: #781d7f;
-      margin-bottom: 0;
-    }
-  </style>
+        .area-container {
+            width: 80%;
+            margin: auto;
+            margin-bottom: 40px;
+            margin-top: 70px;
+        }
+    
+        :root {
+            --primary-color: #9333ea;
+            --primary-hover: #7e22ce;
+            --light-bg: #f9fafb;
+            --card-border: #e5e7eb;
+            --header-color: #111827;
+            --text-color: #374151;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 1.5rem;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            color: #6b7280;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-icon {
+            margin-right: 0.5rem;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--header-color);
+            margin: 0;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .card {
+            border: 1px solid var(--card-border);
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            background-color: #fff;
+            border-radius: 0.5rem;
+        }
+        
+        .tabs-wrapper {
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .nav-tabs {
+            border-bottom: none;
+        }
+        
+        .nav-tabs .nav-link {
+            border: none;
+            border-bottom: 2px solid transparent;
+            border-radius: 0;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+        }
+        
+        .nav-tabs .nav-link.active {
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+        
+        .form-control, .form-select {
+            border: 1px solid #d1d5db;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(147, 51, 234, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .test-cases-card {
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .btn-success {
+            background-color: #10b981;
+            border-color: #10b981;
+        }
+        
+        .btn-success:hover {
+            background-color: #059669;
+            border-color: #059669;
+        }
+        
+        .btn-danger {
+            background-color: #ef4444;
+            border-color: #ef4444;
+        }
+        
+        .btn-danger:hover {
+            background-color: #dc2626;
+            border-color: #dc2626;
+        }
+        
+        .badge.bg-success {
+            background-color: #10b981 !important;
+        }
+        
+        .badge.bg-danger {
+            background-color: #ef4444 !important;
+        }
+        
+        .badge.bg-secondary {
+            background-color: #6b7280 !important;
+        }
+    </style>
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-      <a class="navbar-brand" href="#">CaseyAI</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt nav-icon"></i>Dashboard</a>
-          </li>
-          <li>
-            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#downloadProjectModal">
-              <i class="fas fa-download me-1"></i> Download Project
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Casey</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt nav-icon"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-list-check nav-icon"></i>Requirements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-vial nav-icon"></i>Test Cases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-cog nav-icon"></i>Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
   <div class="container">
 
@@ -1208,94 +1166,27 @@
     </div>
   </div>
 
-  <!-- Add Test Case Modal (Keeping from original) -->
-  <!-- Clear Tests Confirmation Modal (Keeping from original) -->
-  <div class="modal fade" id="clearTestsModal" tabindex="-1" aria-labelledby="clearTestsModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="clearTestsModalLabel"><i class="fas fa-exclamation-triangle me-2"></i>Clear All
-            Test Cases</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Add Test Case Modal (Keeping from original) -->
+    <!-- Clear Tests Confirmation Modal (Keeping from original) -->
+    <div class="modal fade" id="clearTestsModal" tabindex="-1" aria-labelledby="clearTestsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="clearTestsModalLabel"><i class="fas fa-exclamation-triangle me-2"></i>Clear All Test Cases</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to clear all test cases? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="{{ url_for('clear_tests') }}" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i> Clear All
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Are you sure you want to clear all test cases? This action cannot be undone.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <form action="{{ url_for('clear_tests') }}" method="POST" style="display:inline;">
-            <button type="submit" class="btn btn-danger">
-              <i class="fas fa-trash me-1"></i> Clear All
-            </button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
-
-  <!-- Download Project Modal -->
-  <div class="modal fade" id="downloadProjectModal" tabindex="-1" aria-labelledby="downloadProjectModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="downloadProjectModalLabel"><i class="fas fa-download me-2"></i>Download Project
-          </h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="downloadProjectForm" action="{{ url_for('send_project_to_developers') }}" method="POST">
-            <div class="mb-3">
-              <label for="client_name" class="form-label">Your Name*</label>
-              <input type="text" class="form-control" id="client_name" name="client_name" required>
-            </div>
-            <div class="mb-3">
-              <label for="client_email" class="form-label">Your Email Address*</label>
-              <input type="email" class="form-control" id="client_email" name="client_email" required>
-            </div>
-            <div class="mb-3">
-              <label for="client_company" class="form-label">Company Name</label>
-              <input type="text" class="form-control" id="client_company" name="client_company">
-            </div>
-            <div class="mb-3">
-              <label for="client_phone" class="form-label">Phone Number</label>
-              <input type="tel" class="form-control" id="client_phone" name="client_phone">
-            </div>
-            <div class="mb-3">
-              <label for="project_requirements" class="form-label">Additional Requirements or Notes</label>
-              <textarea class="form-control" id="project_requirements" name="project_requirements" rows="3"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" form="downloadProjectForm" class="btn btn-primary">
-            <i class="fas fa-paper-plane me-1"></i> Submit and Download
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Download success modal -->
-  <div class="modal fade" id="downloadSuccessModal" tabindex="-1" aria-labelledby="downloadSuccessModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-success text-white">
-          <h5 class="modal-title" id="downloadSuccessModalLabel"><i class="fas fa-check-circle me-2"></i>Success!</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Thank you for your interest! Your request has been sent to our development team.</p>
-          <p>You will receive the project files shortly.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -1315,47 +1206,71 @@
       });
     });
 
-    // Clone and add a new test case in the modal
-    document.getElementById('add-test-case-btn')?.addEventListener('click', function () {
-      const container = document.getElementById('test-cases-container');
-      const testCases = container.querySelectorAll('.test-case-form');
-      const lastTestCase = testCases[testCases.length - 1];
-      const newTestCase = lastTestCase.cloneNode(true);
-
-      // Update IDs and clear values
-      const newIndex = testCases.length;
-      const inputs = newTestCase.querySelectorAll('input, select');
-      inputs.forEach(input => {
-        const name = input.getAttribute('name');
-        const idBase = input.id.split('_').slice(0, -1).join('_');
-        input.id = `${idBase}_${newIndex}`;
-
-        // Only clear non-default fields
-        if (!(['username_field[]', 'password_field[]', 'submit_button[]', 'success_indicators[]'].includes(name))) {
-          input.value = '';
-        }
-      });
-
-      // Append the new test case
-      container.appendChild(newTestCase);
-
-      // Add a remove button for all but the first test case
-      if (testCases.length > 0) {
-        const removeButton = document.createElement('button');
-        removeButton.type = 'button';
-        removeButton.className = 'btn btn-sm btn-outline-danger mt-2';
-        removeButton.innerHTML = '<i class="fas fa-times me-1"></i> Remove this test case';
-        removeButton.onclick = function () {
-          this.closest('.test-case-form').remove();
-        };
-        newTestCase.appendChild(removeButton);
-      }
-    });
-
-
-
-
-  </script>
+        // Clone and add a new test case in the modal
+        document.getElementById('add-test-case-btn')?.addEventListener('click', function() {
+            const container = document.getElementById('test-cases-container');
+            const testCases = container.querySelectorAll('.test-case-form');
+            const lastTestCase = testCases[testCases.length - 1];
+            const newTestCase = lastTestCase.cloneNode(true);
+            
+            // Update IDs and clear values
+            const newIndex = testCases.length;
+            const inputs = newTestCase.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                const name = input.getAttribute('name');
+                const idBase = input.id.split('_').slice(0, -1).join('_');
+                input.id = `${idBase}_${newIndex}`;
+                
+                // Only clear non-default fields
+                if (!(['username_field[]', 'password_field[]', 'submit_button[]', 'success_indicators[]'].includes(name))) {
+                    input.value = '';
+                }
+            });
+            
+            // Append the new test case
+            container.appendChild(newTestCase);
+            
+            // Add a remove button for all but the first test case
+            if (testCases.length > 0) {
+                const removeButton = document.createElement('button');
+                removeButton.type = 'button';
+                removeButton.className = 'btn btn-sm btn-outline-danger mt-2';
+                removeButton.innerHTML = '<i class="fas fa-times me-1"></i> Remove this test case';
+                removeButton.onclick = function() {
+                    this.closest('.test-case-form').remove();
+                };
+                newTestCase.appendChild(removeButton);
+            }
+        });
+        
+        // Add another test inline
+        document.getElementById('add-another-test-btn')?.addEventListener('click', function() {
+            const form = document.getElementById('addTestFormInline');
+            const originalInputs = form.querySelectorAll('input, select');
+            const dividers = form.querySelectorAll('.row');
+            
+            // Clone each row and clear input values
+            dividers.forEach(divider => {
+                const clone = divider.cloneNode(true);
+                const inputs = clone.querySelectorAll('input, select');
+                
+                inputs.forEach(input => {
+                    const name = input.getAttribute('name');
+                    // Only clear non-default fields
+                    if (!(['username_field[]', 'password_field[]', 'submit_button[]', 'success_indicators[]'].includes(name))) {
+                        input.value = '';
+                    }
+                });
+                
+                form.insertBefore(clone, this.parentNode);
+            });
+            
+            // Add a visual separator
+            const separator = document.createElement('hr');
+            separator.className = 'my-4';
+            form.insertBefore(separator, this.parentNode);
+        });
+    </script>
 </body>
 
 </html>
