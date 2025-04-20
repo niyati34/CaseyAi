@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="CaseyAI - Web Application Testing Platform">
+  <meta name="description"
+    content="Comprehensive test automation solution for web applications. Create, manage, and analyze automated login tests with CaseyAI's intuitive dashboard.">
+  <meta name="keywords"
+    content="test automation, web testing, login testing, QA automation, test case generation, test analysis, automated testing, AI testing, test management">
+  <meta name="author" content="CaseyAI">
+  <meta name="robots" content="dashboard, follow">
+  <meta name="language" content="English">
 
 
+  <title>Casey - Test Automation Dashboard</title>
 
-    <title>Casey - Test Automation Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart .js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-  
-    
-         <style>
-            .tcad-container {
+
+
+  <style>
+    .tcad-container {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       color: #111827;
       background-color: #f9fafb;
       padding: 24px;
       border-radius: 12px;
     }
-    
+
     .tcad-header {
       display: flex;
       align-items: center;
@@ -31,28 +45,28 @@
       padding-bottom: 18px;
       border-bottom: 1px solid #e5e7eb;
     }
-    
+
     .tcad-title {
       font-size: 26px;
       font-weight: 700;
       color: #7e22ce;
       margin: 0;
     }
-    
+
     .tcad-subtitle {
       color: #374151;
       font-size: 14px;
       margin: 0;
       margin-top: 5px;
     }
-    
+
     .tcad-stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
       margin-bottom: 28px;
     }
-    
+
     .tcad-stat-card {
       background: white;
       border-radius: 12px;
@@ -61,12 +75,12 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       border: 1px solid #e5e7eb;
     }
-    
+
     .tcad-stat-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 18px rgba(126, 34, 206, 0.15);
     }
-    
+
     .tcad-stat-label {
       font-size: 14px;
       font-weight: 500;
@@ -75,25 +89,36 @@
       display: flex;
       align-items: center;
     }
-    
+
     .tcad-stat-value {
       font-size: 28px;
       font-weight: 700;
       margin: 0;
     }
-    
-    .tcad-value-total { color: #9333ea; }
-    .tcad-value-passed { color: #16a34a; }
-    .tcad-value-failed { color: #dc2626; }
-    .tcad-value-rate { color: #7e22ce; }
-    
+
+    .tcad-value-total {
+      color: #9333ea;
+    }
+
+    .tcad-value-passed {
+      color: #16a34a;
+    }
+
+    .tcad-value-failed {
+      color: #dc2626;
+    }
+
+    .tcad-value-rate {
+      color: #7e22ce;
+    }
+
     .tcad-charts-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       margin-bottom: 28px;
     }
-    
+
     .tcad-chart-card {
       background: white;
       border-radius: 12px;
@@ -101,7 +126,7 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       border: 1px solid #e5e7eb;
     }
-    
+
     .tcad-chart-title {
       font-size: 15px;
       font-weight: 600;
@@ -110,16 +135,16 @@
       margin-bottom: 18px;
       text-align: center;
     }
-    
+
     .tcad-chart-container {
       position: relative;
       height: 220px;
     }
-    
+
     .tcad-full-chart {
       margin-bottom: 28px;
     }
-    
+
     .tcad-icon {
       margin-right: 12px;
       background-color: rgba(147, 51, 234, 0.1);
@@ -127,7 +152,7 @@
       border-radius: 10px;
       color: #9333ea;
     }
-    
+
     .tcad-coverage-container {
       background: white;
       border-radius: 12px;
@@ -136,14 +161,14 @@
       border: 1px solid #e5e7eb;
       margin-bottom: 28px;
     }
-    
+
     .tcad-coverage-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
-    
+
     .tcad-coverage-title {
       font-size: 18px;
       font-weight: 600;
@@ -152,1062 +177,1185 @@
       display: flex;
       align-items: center;
     }
-    
+
     .tcad-coverage-title i {
       margin-right: 10px;
       color: #9333ea;
     }
-    
+
     .tcad-coverage-legend {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-bottom: 20px;
     }
-    
+
     .tcad-legend-item {
       display: flex;
       align-items: center;
       font-size: 13px;
       color: #374151;
     }
-    
+
     .tcad-legend-color {
       width: 14px;
       height: 14px;
       border-radius: 4px;
       margin-right: 6px;
     }
-    
+
     .tcad-coverage-chart {
       height: 300px;
       position: relative;
     }
-    
+
     .tcad-stat-icon {
       margin-right: 8px;
       color: #9333ea;
       font-size: 16px;
     }
-    
+
     @media (max-width: 1024px) {
       .tcad-charts-row {
         grid-template-columns: repeat(2, 1fr);
       }
     }
-    
+
     @media (max-width: 768px) {
       .tcad-stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      
+
       .tcad-charts-row {
         grid-template-columns: 1fr;
       }
     }
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        
-        .chart-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px; /* Space between charts */
-            margin-bottom: 30px;
-        }
-        #areaChart {
-    margin-top: 50px;
-}
 
-        .chart-box {
-            width: 400px; /* Equal width for both charts */
-            height: 300px;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
 
-        .area-container {
-            width: 80%;
-            margin: auto;
-            margin-bottom: 40px;
-            margin-top: 70px;
-        }
-    
-        :root {
-            --primary-color: #9333ea;
-            --primary-hover: #7e22ce;
-            --light-bg: #f9fafb;
-            --card-border: #e5e7eb;
-            --header-color: #111827;
-            --text-color: #374151;
-        }
-        
-        body {
-            background-color: var(--light-bg);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: var(--text-color);
-        }
-        
-        .navbar {
-            background-color: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            padding: 0.75rem 1.5rem;
-        }
-        
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        
-        .nav-link {
-            color: #6b7280;
-            padding: 0.5rem 1rem;
-            font-weight: 500;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary-color);
-        }
-        
-        .nav-link.active {
-            color: var(--primary-color);
-        }
-        
-        .nav-icon {
-            margin-right: 0.5rem;
-        }
-        
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-        }
-        
-        .page-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--header-color);
-            margin: 0;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-            border-color: var(--primary-hover);
-        }
-        
-        .btn-outline-primary {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .card {
-            border: 1px solid var(--card-border);
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1.5rem;
-        }
-        
-        .card-header {
-            background-color: white;
-            border-bottom: 1px solid var(--card-border);
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-        }
-        
-        .tab-content {
-            background-color: #fff;
-            border-radius: 0.5rem;
-        }
-        
-        .tabs-wrapper {
-            border-bottom: 1px solid var(--card-border);
-        }
-        
-        .nav-tabs {
-            border-bottom: none;
-        }
-        
-        .nav-tabs .nav-link {
-            border: none;
-            border-bottom: 2px solid transparent;
-            border-radius: 0;
-            padding: 1rem 1.5rem;
-            font-weight: 500;
-        }
-        
-        .nav-tabs .nav-link.active {
-            border-bottom: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: #6b7280;
-        }
-        
-        .form-control, .form-select {
-            border: 1px solid #d1d5db;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.375rem;
-        }
-        
-        .form-control:focus, .form-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(147, 51, 234, 0.25);
-        }
-        
-        .form-label {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-        
-        .test-cases-card {
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-        
-        .btn-success {
-            background-color: #10b981;
-            border-color: #10b981;
-        }
-        
-        .btn-success:hover {
-            background-color: #059669;
-            border-color: #059669;
-        }
-        
-        .btn-danger {
-            background-color: #ef4444;
-            border-color: #ef4444;
-        }
-        
-        .btn-danger:hover {
-            background-color: #dc2626;
-            border-color: #dc2626;
-        }
-        
-        .badge.bg-success {
-            background-color: #10b981 !important;
-        }
-        
-        .badge.bg-danger {
-            background-color: #ef4444 !important;
-        }
-        
-        .badge.bg-secondary {
-            background-color: #6b7280 !important;
-        }
-    </style>
+    .chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      /* Space between charts */
+      margin-bottom: 30px;
+    }
+
+    #areaChart {
+      margin-top: 50px;
+    }
+
+    .chart-box {
+      width: 400px;
+      /* Equal width for both charts */
+      height: 300px;
+    }
+
+    .area-container {
+      width: 80%;
+      margin: auto;
+      margin-bottom: 40px;
+      margin-top: 70px;
+    }
+
+    :root {
+      --primary-color: #9333ea;
+      --primary-hover: #7e22ce;
+      --light-bg: #f9fafb;
+      --card-border: #e5e7eb;
+      --header-color: #111827;
+      --text-color: #374151;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-color);
+    }
+
+    .navbar {
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 0.75rem 1.5rem;
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .nav-link {
+      color: #6b7280;
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-link.active {
+      color: var(--primary-color);
+    }
+
+    .nav-icon {
+      margin-right: 0.5rem;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+    }
+
+    .page-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--header-color);
+      margin: 0;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    .bg-primary {
+      background-color: var(--primary-color) !important;
+      border-color: var(--primary-color);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      border-color: var(--primary-hover);
+    }
+
+    .btn-outline-primary {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    .card {
+      border: 1px solid var(--card-border);
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-header {
+      background-color: white;
+      border-bottom: 1px solid var(--card-border);
+      padding: 1rem 1.5rem;
+      font-weight: 600;
+    }
+
+    .tab-content {
+      background-color: #fff;
+      border-radius: 0.5rem;
+    }
+
+    .tabs-wrapper {
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .nav-tabs {
+      border-bottom: none;
+    }
+
+    .nav-tabs .nav-link {
+      border: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+    }
+
+    .nav-tabs .nav-link.active {
+      border-bottom: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: #6b7280;
+    }
+
+    .form-control,
+    .form-select {
+      border: 1px solid #d1d5db;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.375rem;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(147, 51, 234, 0.25);
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .test-cases-card {
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .btn-success {
+      background-color: #10b981;
+      border-color: #10b981;
+    }
+
+    .btn-success:hover {
+      background-color: #059669;
+      border-color: #059669;
+    }
+
+    .btn-danger {
+      background-color: #ef4444;
+      border-color: #ef4444;
+    }
+
+    .btn-danger:hover {
+      background-color: #dc2626;
+      border-color: #dc2626;
+    }
+
+    .badge.bg-success {
+      background-color: #10b981 !important;
+    }
+
+    .badge.bg-danger {
+      background-color: #ef4444 !important;
+    }
+
+    .badge.bg-secondary {
+      background-color: #6b7280 !important;
+    }
+
+    /* Security Warning Styles */
+    .security-warning {
+      background-color: #fabcf9;
+      border: 1px solid #e944ef;
+      border-radius: 1.3rem;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .security-warning-icon {
+      color: #cd26dc;
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .security-warning-content {
+      flex: 1;
+    }
+
+    .security-warning-title {
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: #b11cb9;
+      margin-bottom: 0.5rem;
+    }
+
+    .security-warning-text {
+      color: #781d7f;
+      margin-bottom: 0;
+    }
+  </style>
 </head>
+
 <body>
-    
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">Casey</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt nav-icon"></i>Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-list-check nav-icon"></i>Requirements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-vial nav-icon"></i>Test Cases</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-cog nav-icon"></i>Settings</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-        <!-- Flash Messages (keeping from original) -->
-        <div class="row">
-            <div class="col-12 mt-3">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category if category != 'message' else 'info' }} alert-dismissible fade show" role="alert">
-                                {{ message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-            </div>
+      <a class="navbar-brand" href="#">CaseyAI</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt nav-icon"></i>Dashboard</a>
+          </li>
+          <li>
+            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#downloadProjectModal">
+              <i class="fas fa-download me-1"></i> Download Project
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Security Warning Section -->
+    <div class="security-warning mt-4">
+      <div class="security-warning-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <div class="security-warning-content">
+        <h3 class="security-warning-title">Security Notice: Test Environment Only</h3>
+        <p class="security-warning-text">This application is for testing purposes only. <strong>Do not enter real
+            credentials or sensitive data.</strong> All information entered here may be visible to others and is not
+          encrypted or securely stored. Use test/dummy accounts and data only.</p>
+      </div>
+    </div>
+
+    <!-- Flash Messages (keeping from original) -->
+    <div class="row">
+      <div class="col-12 mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category if category != 'message' else 'info' }} alert-dismissible fade show"
+          role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
 
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1 class="page-title">Project A Dashboard Overview</h1>
-        </div>
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">Project A Dashboard Overview</h1>
+    </div>
 
-       
-    
-        <!-- Main Content -->
-        <div class="card test-cases-card">
-            <div class="tabs-wrapper">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="test-automation-tab" data-bs-toggle="tab" data-bs-target="#test-automation" type="button" role="tab" aria-controls="test-automation" aria-selected="true">
-                            Test Automation
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="test-generation-tab" data-bs-toggle="tab" data-bs-target="#test-generation" type="button" role="tab" aria-controls="test-generation" aria-selected="false">
-                            Test Case Generation
-                        </button>
-                    </li>
-                    <!-- New Analysis Tab -->
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis" type="button" role="tab" aria-controls="analysis" aria-selected="false">
-                        Analysis
-                        </button>
-                    </li>
-                </ul>
+
+
+    <!-- Main Content -->
+    <div class="card test-cases-card">
+      <div class="tabs-wrapper">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="test-automation-tab" data-bs-toggle="tab"
+              data-bs-target="#test-automation" type="button" role="tab" aria-controls="test-automation"
+              aria-selected="true">
+              Test Automation
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="test-generation-tab" data-bs-toggle="tab" data-bs-target="#test-generation"
+              type="button" role="tab" aria-controls="test-generation" aria-selected="false">
+              Test Case Generation
+            </button>
+          </li>
+          <!-- New Analysis Tab -->
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis" type="button"
+              role="tab" aria-controls="analysis" aria-selected="false">
+              Analysis
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-content p-4" id="myTabContent">
+        <!-- Test Automation Tab -->
+        <div class="tab-pane fade show active" id="test-automation" role="tabpanel"
+          aria-labelledby="test-automation-tab">
+          <div class="mb-4">
+            <h2 class="h4 mb-3">Test Automation Management</h2>
+
+            <div class="d-flex justify-content-end mb-3">
+              <a href="{{ url_for('run_tests') }}" class="btn btn-success me-2">
+                <i class="fas fa-play me-1"></i> Run All Tests
+              </a>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#clearTestsModal">
+                <i class="fas fa-trash me-1"></i> Clear All Tests
+              </button>
             </div>
+          </div>
 
-            <div class="tab-content p-4" id="myTabContent">
-                <!-- Test Automation Tab -->
-                <div class="tab-pane fade show active" id="test-automation" role="tabpanel" aria-labelledby="test-automation-tab">
-                    <div class="mb-4">
-                       <h2 class="h4 mb-3">Test Automation Management</h2>
-                 
-                        <div class="d-flex justify-content-end mb-3">
-                            <a href="{{ url_for('run_tests') }}" class="btn btn-success me-2">
-                                <i class="fas fa-play me-1"></i> Run All Tests
-                            </a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#clearTestsModal">
-                                <i class="fas fa-trash me-1"></i> Clear All Tests
-                            </button>
-                        </div>
-                    </div>
-                    
 
-                    <div class="card">
-                        <div class="card-header">
-                            Existing Test Cases
-                        </div>
-                        <div class="card-body">
-                            <!-- Test Cases Table -->
-                            <form id="clearSelectedForm" action="{{ url_for('clear_selected_tests') }}" method="post">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th><input type="checkbox" id="selectAll"></th>
-                                                <th>ID</th>
-                                                <th>Description</th>
-                                                <th>Website URL</th>
-                                                <th>Username</th>
-                                                <th>Password</th>
-                                                <th>Expected</th>
-                                                <th>Result</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% if tests %}
-                                                {% for test in tests %}
-                                                    <tr>
-                                                        <td><input type="checkbox" name="selected_tests[]" value="{{ test.id }}"></td>
-                                                        <td>{{ test.id }}</td>
-                                                        <td>{{ test.description }}</td>
-                                                        <td>{{ test.website_url }}</td>
-                                                        <td>{{ test.username }}</td>
-                                                        <td>******</td>
-                                                        <td>{{ test.expected }}</td>
-                                                        <td>
-                                                            {% if test.actual_result is defined %}
-                                                                {% if test.actual_result == "Success" %}
-                                                                    <span class="badge bg-success">Success</span>
-                                                                {% elif test.actual_result == "Failed" %}
-                                                                    <span class="badge bg-danger">Failed</span>
-                                                                {% else %}
-                                                                    <span class="badge bg-warning text-dark">{{ test.actual_result }}</span>
-                                                                {% endif %}
-                                                            {% else %}
-                                                                <span class="badge bg-secondary">Not Run</span>
-                                                            {% endif %}
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            {% else %}
-                                                <tr>
-                                                    <td colspan="8" class="text-center">No test cases added yet.</td>
-                                                </tr>
-                                            {% endif %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                {% if tests %}
-                                    <button type="submit" class="btn btn-outline-danger mt-3">
-                                        <i class="fas fa-trash-alt me-1"></i> Clear Selected
-                                    </button>
-                                {% endif %}
-                            </form>
-
-                            {% if request.args.get('download_report') %}
-                                <div class="alert alert-success mt-3">
-                                    <p><i class="fas fa-file-download me-2"></i> Report is ready for download!</p>
-                                    <a href="{{ url_for('download_report', filename=request.args.get('download_report')) }}" class="btn btn-primary">
-                                        <i class="fas fa-download me-1"></i> Download Report
-                                    </a>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <!-- Add New Test Cases -->
-                    <div class="card mt-4">
-                        <div class="card-header">
-                            Add New Test Cases
-                        </div>
-                        <div class="card-body">
-                            <form action="{{ url_for('add_test_cases') }}" method="post" id="addTestFormInline">
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="inline_test_id" class="form-label">Test ID</label>
-                                            <input type="text" class="form-control" id="inline_test_id" name="test_id[]" placeholder="TC-0001" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="mb-3">
-                                            <label for="inline_description" class="form-label">Description</label>
-                                            <input type="text" class="form-control" id="inline_description" name="description[]" placeholder="Test case description" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-12">
-                                        <div class="mb-3">
-                                            <label for="inline_website_url" class="form-label">Website URL</label>
-                                            <input type="url" class="form-control" id="inline_website_url" name="website_url[]" placeholder="https://example.com/login" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="inline_username" class="form-label">Username</label>
-                                            <input type="text" class="form-control" id="inline_username" name="username[]" placeholder="testuser" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="inline_password" class="form-label">Password</label>
-                                            <input type="password" class="form-control" id="inline_password" name="password[]" placeholder="password" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="inline_expected" class="form-label">Expected Result</label>
-                                            <select class="form-select" id="inline_expected" name="expected[]" required>
-                                                <option value="Success">Success</option>
-                                                <option value="Failed">Failed</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 d-flex align-items-end">
-                                        <button type="button" class="btn btn-outline-primary me-2" id="advanced-options-toggle">
-                                            Advanced Options
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <!-- Advanced Options (Hidden by Default) -->
-                                <div id="advanced-options" class="d-none">
-                                    <div class="row mb-3">
-                                        <div class="col-md-4">
-                                            <div class="mb-3">
-                                                <label for="inline_username_field" class="form-label">Username Field</label>
-                                                <input type="text" class="form-control" id="inline_username_field" name="username_field[]" placeholder="username" value="username">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="mb-3">
-                                                <label for="inline_password_field" class="form-label">Password Field</label>
-                                                <input type="text" class="form-control" id="inline_password_field" name="password_field[]" placeholder="password" value="password">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="mb-3">
-                                                <label for="inline_submit_button" class="form-label">Submit Button</label>
-                                                <input type="text" class="form-control" id="inline_submit_button" name="submit_button[]" placeholder="login" value="login">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="inline_success_indicators" class="form-label">Success Indicators</label>
-                                                <input type="text" class="form-control" id="inline_success_indicators" name="success_indicators[]" placeholder="dashboard,home,profile" value="dashboard,home,profile,welcome,index">
-                                                <div class="form-text">Comma-separated words to identify successful login</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="inline_logout_url" class="form-label">Logout URL (Optional)</label>
-                                                <input type="text" class="form-control" id="inline_logout_url" name="logout_url[]" placeholder="https://example.com/logout">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex">
-                                    <button type="button" class="btn btn-outline-primary me-2" id="add-another-test-btn">
-                                        <i class="fas fa-plus-circle me-1"></i> Add Another Test Case
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save me-1"></i> Save Test Cases
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+          <div class="card">
+            <div class="card-header">
+              Existing Test Cases
+            </div>
+            <div class="card-body">
+              <!-- Test Cases Table -->
+              <form id="clearSelectedForm" action="{{ url_for('clear_selected_tests') }}" method="post">
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover">
+                    <thead class="table-light">
+                      <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Website URL</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Expected</th>
+                        <th>Result</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if tests %}
+                      {% for test in tests %}
+                      <tr>
+                        <td><input type="checkbox" name="selected_tests[]" value="{{ test.id }}"></td>
+                        <td>{{ test.id }}</td>
+                        <td>{{ test.description }}</td>
+                        <td>{{ test.website_url }}</td>
+                        <td>{{ test.username }}</td>
+                        <td>******</td>
+                        <td>{{ test.expected }}</td>
+                        <td>
+                          {% if test.actual_result is defined %}
+                          {% if test.actual_result == "Success" %}
+                          <span class="badge bg-success">Success</span>
+                          {% elif test.actual_result == "Failed" %}
+                          <span class="badge bg-danger">Failed</span>
+                          {% else %}
+                          <span class="badge bg-warning text-dark">{{ test.actual_result }}</span>
+                          {% endif %}
+                          {% else %}
+                          <span class="badge bg-secondary">Not Run</span>
+                          {% endif %}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                      {% else %}
+                      <tr>
+                        <td colspan="8" class="text-center">No test cases added yet.</td>
+                      </tr>
+                      {% endif %}
+                    </tbody>
+                  </table>
                 </div>
-                
-                <!-- Test Case Generation Tab -->
-                <div class="tab-pane fade" id="test-generation" role="tabpanel" aria-labelledby="test-generation-tab">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card h-100">
-                                <div class="card-header">
-                                    <i class="fas fa-magic me-2"></i>Generate Test Cases with AI
-                                </div>
-                                <div class="card-body">
-                                    <form action="{{ url_for('generate_test_cases') }}" method="post">
-                                        <div class="mb-3">
-                                            <label for="page_name" class="form-label">Page/Feature Name</label>
-                                            <input type="text" class="form-control" id="page_name" name="page_name" placeholder="Login Page, Registration Form, etc." required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="additional_context" class="form-label">Additional Context (Optional)</label>
-                                            <textarea class="form-control" id="additional_context" name="additional_context" rows="5" placeholder="Describe the page features, functionality, requirements, etc. to get more relevant test cases"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-magic me-1"></i> Generate Test Cases
-                                        </button>
-                                    </form>
-                                    
-                                    <div class="mt-4">
-                                        <div class="alert alert-info">
-                                            <i class="fas fa-info-circle me-2"></i> The AI will generate test cases based on the provided information and return a Word document.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card h-100">
-                                <div class="card-header">
-                                    <i class="fab fa-figma me-2"></i>Generate Test Cases from Figma Design
-                                </div>
-                                <div class="card-body">
-                                    <form action="{{ url_for('generate_from_figma') }}" method="post">
-                                        <div class="mb-3">
-                                            <label for="figma_file_key" class="form-label">Figma File Key</label>
-                                            <input type="text" class="form-control" id="figma_file_key" name="figma_file_key" placeholder="e.g. aBcDeFgHiJkL" required>
-                                            <div class="form-text">The file key is found in the Figma URL: figma.com/file/<span class="text-danger">aBcDeFgHiJkL</span>/...</div>
-                                        </div>
-                                        <!-- Hidden to match provided UI but keeping for Flask functionality -->
-                                        <input type="hidden" id="figma_access_token" name="figma_access_token" value="{{ figma_token }}">
-                                        
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fab fa-figma me-1"></i> Generate Test Cases from Figma
-                                        </button>
-                                    </form>
-                                    
-                                    <div class="mt-4">
-                                        <div class="alert alert-info">
-                                            <i class="fas fa-info-circle me-2"></i> The system will analyze your Figma design and generate appropriate test cases in a Word document.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% if tests %}
+                <button type="submit" class="btn btn-outline-danger mt-3">
+                  <i class="fas fa-trash-alt me-1"></i> Clear Selected
+                </button>
+                {% endif %}
+              </form>
 
-                <div class="tab-pane fade" id="analysis" role="tabpanel" aria-labelledby="analysis-tab">
-                        
-                        <!-- Summary Stats -->
-                        <div class="tcad-container">
-                            <div class="tcad-header">
-                              <div class="tcad-icon">
-                                <i class="fas fa-chart-line"></i>
-                              </div>
-                              <div>
-                                <h1 class="tcad-title">Test Case Analysis</h1>
-                                <p class="tcad-subtitle">Performance metrics and test execution statistics</p>
-                              </div>
-                            </div>
-                            
-                            <!-- Summary Stats -->
-                            <div class="tcad-stats-grid">
-                              <div class="tcad-stat-card">
-                                <p class="tcad-stat-label"><i class="fas fa-tasks tcad-stat-icon"></i>Total Tests</p>
-                                <h2 class="tcad-stat-value tcad-value-total" id="tcad-totalTests">0</h2>
-                              </div>
-                              <div class="tcad-stat-card">
-                                <p class="tcad-stat-label"><i class="fas fa-check-circle tcad-stat-icon"></i>Passed</p>
-                                <h2 class="tcad-stat-value tcad-value-passed" id="tcad-passedTests">0</h2>
-                              </div>
-                              <div class="tcad-stat-card">
-                                <p class="tcad-stat-label"><i class="fas fa-times-circle tcad-stat-icon"></i>Failed</p>
-                                <h2 class="tcad-stat-value tcad-value-failed" id="tcad-failedTests">0</h2>
-                              </div>
-                              <div class="tcad-stat-card">
-                                <p class="tcad-stat-label"><i class="fas fa-percentage tcad-stat-icon"></i>Pass Rate</p>
-                                <h2 class="tcad-stat-value tcad-value-rate" id="tcad-passRate">0%</h2>
-                              </div>
-                            </div>
-                            
-                            <!-- Chart Row -->
-                            <div class="tcad-charts-row">
-                              <div class="tcad-chart-card">
-                                <h3 class="tcad-chart-title">Passed vs Failed</h3>
-                                <div class="tcad-chart-container">
-                                  <canvas id="tcad-donutChart"></canvas>
-                                </div>
-                              </div>
-                              <div class="tcad-chart-card">
-                                <h3 class="tcad-chart-title">Test Completion</h3>
-                                <div class="tcad-chart-container">
-                                  <canvas id="tcad-gaugeChart"></canvas>
-                                </div>
-                              </div>
-                              <div class="tcad-chart-card">
-                                <h3 class="tcad-chart-title">Tests by Browser</h3>
-                                <div class="tcad-chart-container">
-                                  <canvas id="tcad-browserChart"></canvas>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <!-- Full Width Charts -->
-                            <div class="tcad-chart-card tcad-full-chart">
-                              <h3 class="tcad-chart-title">Test Execution Over Time</h3>
-                              <div class="tcad-chart-container">
-                                <canvas id="tcad-areaChart"></canvas>
-                              </div>
-                            </div>
-                            
-                            <!-- Enhanced Coverage Section -->
-                            <div class="tcad-coverage-container">
-                              <div class="tcad-coverage-header">
-                                <h3 class="tcad-coverage-title">
-                                  <i class="fas fa-layer-group"></i>
-                                  Test Coverage by Description
-                                </h3>
-                                <button id="tcad-toggle-view" style="background: #9333ea; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500;">
-                                  Toggle View
-                                </button>
-                              </div>
-                              
-                              <div class="tcad-coverage-legend" id="tcad-coverage-legend">
-                                <!-- Legend will be populated dynamically -->
-                              </div>
-                              
-                              <div class="tcad-coverage-chart">
-                                <canvas id="tcad-coverageBarChart"></canvas>
-                              </div>
-                            </div>
-                          </div>
-                        
-                          <script>
-                            document.addEventListener("DOMContentLoaded", function () {
-                              // Theme colors
-                              const themeColors = [
-                                '#9333ea', // Purple
-                                '#7e22ce', // Dark Purple
-                                '#6d28d9', // Indigo
-                                '#8b5cf6', // Violet
-                                '#a855f7', // Pink Purple
-                                '#c026d3', // Fuchsia
-                                '#4338ca', // Deep indigo
-                                '#4f46e5'  // Blue indigo
-                              ];
-                              
-                              let isHorizontalBar = true;
-                              let coverageChart; // Reference to the coverage chart for updating
-                              
-                              fetch("/get_chart_data")
-                                .then(response => response.json())
-                                .then(data => {
-                                  // Update summary stats
-                                  document.getElementById("tcad-totalTests").textContent = data.total;
-                                  document.getElementById("tcad-passedTests").textContent = data.passed;
-                                  document.getElementById("tcad-failedTests").textContent = data.failed;
-                                  document.getElementById("tcad-passRate").textContent = data.progress + "%";
-                        
-                                  // Charts configuration
-                                  const chartOptions = {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    plugins: {
-                                      legend: {
-                                        position: 'bottom',
-                                        labels: {
-                                          boxWidth: 12,
-                                          padding: 15,
-                                          font: {
-                                            size: 11
-                                          }
-                                        }
-                                      },
-                                      tooltip: {
-                                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                                        titleColor: '#111827',
-                                        bodyColor: '#374151',
-                                        borderColor: '#e5e7eb',
-                                        borderWidth: 1,
-                                        padding: 12,
-                                        boxWidth: 8,
-                                        boxHeight: 8,
-                                        usePointStyle: true,
-                                        cornerRadius: 6,
-                                        titleFont: {
-                                          weight: 'bold'
-                                        }
-                                      }
-                                    }
-                                  };
-                        
-                                  // Donut Chart (Passed vs Failed)
-                                  new Chart(document.getElementById("tcad-donutChart"), {
-                                    type: "doughnut",
-                                    data: {
-                                      labels: ["Passed", "Failed"],
-                                      datasets: [{
-                                        data: [data.passed, data.failed],
-                                        backgroundColor: ["#16a34a", "#dc2626"],
-                                        borderWidth: 1,
-                                        borderColor: '#fff'
-                                      }]
-                                    },
-                                    options: {
-                                      ...chartOptions,
-                                      cutout: "70%"
-                                    }
-                                  });
-                        
-                                  // Gauge Chart (Completion)
-                                  new Chart(document.getElementById("tcad-gaugeChart"), {
-                                    type: "doughnut",
-                                    data: {
-                                      labels: ["Completed", "Remaining"],
-                                      datasets: [{
-                                        data: [data.progress, 100 - data.progress],
-                                        backgroundColor: ["#9333ea", "#e5e7eb"],
-                                        borderWidth: 0
-                                      }]
-                                    },
-                                    options: {
-                                      ...chartOptions,
-                                      cutout: "80%",
-                                      rotation: -90,
-                                      circumference: 180,
-                                      plugins: {
-                                        legend: { display: false },
-                                        tooltip: chartOptions.plugins.tooltip
-                                      }
-                                    }
-                                  });
-                        
-                                  // Bar Chart (Browsers)
-                                  new Chart(document.getElementById("tcad-browserChart"), {
-                                    type: "bar",
-                                    data: {
-                                      labels: Object.keys(data.browser_count),
-                                      datasets: [{
-                                        label: "Tests",
-                                        data: Object.values(data.browser_count),
-                                        backgroundColor: "#7e22ce",
-                                        borderRadius: 6
-                                      }]
-                                    },
-                                    options: {
-                                      ...chartOptions,
-                                      plugins: {
-                                        legend: { display: false },
-                                        tooltip: chartOptions.plugins.tooltip
-                                      },
-                                      scales: {
-                                        y: {
-                                          beginAtZero: true,
-                                          grid: {
-                                            color: 'rgba(0, 0, 0, 0.05)'
-                                          }
-                                        },
-                                        x: {
-                                          grid: {
-                                            display: false
-                                          }
-                                        }
-                                      }
-                                    }
-                                  });
-                        
-                                  // Area Chart (Time Series)
-                                  new Chart(document.getElementById("tcad-areaChart"), {
-                                    type: "line",
-                                    data: {
-                                      labels: data.dates,
-                                      datasets: [{
-                                        label: "Tests Executed",
-                                        data: data.tests_executed,
-                                        backgroundColor: "rgba(147, 51, 234, 0.2)",
-                                        borderColor: "#9333ea",
-                                        pointBackgroundColor: "#9333ea",
-                                        pointBorderColor: "#fff",
-                                        pointRadius: 4,
-                                        pointHoverRadius: 6,
-                                        fill: true,
-                                        tension: 0.3
-                                      }]
-                                    },
-                                    options: {
-                                      ...chartOptions,
-                                      scales: {
-                                        y: {
-                                          beginAtZero: true,
-                                          grid: {
-                                            color: 'rgba(0, 0, 0, 0.05)'
-                                          }
-                                        },
-                                        x: {
-                                          grid: {
-                                            display: false
-                                          }
-                                        }
-                                      }
-                                    }
-                                  });
-                        
-                                  // Create dynamic coverage data
-                                  const coverageLabels = Object.keys(data.description_coverage);
-                                  const coverageData = Object.values(data.description_coverage);
-                                  
-                                  // Create colored datasets for coverage
-                                  const backgroundColors = coverageLabels.map((_, i) => themeColors[i % themeColors.length]);
-                                  
-                                  // Create legend
-                                  const legendContainer = document.getElementById('tcad-coverage-legend');
-                                  coverageLabels.forEach((label, i) => {
-                                    const legendItem = document.createElement('div');
-                                    legendItem.className = 'tcad-legend-item';
-                                    
-                                    const colorSquare = document.createElement('div');
-                                    colorSquare.className = 'tcad-legend-color';
-                                    colorSquare.style.backgroundColor = backgroundColors[i];
-                                    
-                                    const labelText = document.createElement('span');
-                                    labelText.textContent = label;
-                                    
-                                    legendItem.appendChild(colorSquare);
-                                    legendItem.appendChild(labelText);
-                                    legendContainer.appendChild(legendItem);
-                                  });
-                                  
-                                  // Function to create coverage chart
-                                  function createCoverageChart(horizontal) {
-                                    if (coverageChart) {
-                                      coverageChart.destroy();
-                                    }
-                                    
-                                    coverageChart = new Chart(document.getElementById("tcad-coverageBarChart"), {
-                                      type: "bar",
-                                      data: {
-                                        labels: coverageLabels,
-                                        datasets: [{
-                                          label: "Test Count",
-                                          data: coverageData,
-                                          backgroundColor: backgroundColors,
-                                          borderRadius: 6,
-                                          maxBarThickness: horizontal ? 28 : 50
-                                        }]
-                                      },
-                                      options: {
-                                        ...chartOptions,
-                                        indexAxis: horizontal ? "y" : "x",
-                                        plugins: {
-                                          legend: { display: false },
-                                          tooltip: {
-                                            ...chartOptions.plugins.tooltip,
-                                            callbacks: {
-                                              title: function(context) {
-                                                return context[0].label;
-                                              },
-                                              label: function(context) {
-                                                return `Tests: ${context.raw}`;
-                                              }
-                                            }
-                                          }
-                                        },
-                                        scales: {
-                                          x: {
-                                            beginAtZero: true,
-                                            grid: {
-                                              color: 'rgba(0, 0, 0, 0.05)'
-                                            }
-                                          },
-                                          y: {
-                                            grid: {
-                                              color: horizontal ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0.05)'
-                                            }
-                                          }
-                                        },
-                                        animation: {
-                                          duration: 500,
-                                          easing: 'easeOutQuart'
-                                        }
-                                      }
-                                    });
-                                  }
-                                  
-                                  // Initialize coverage chart
-                                  createCoverageChart(isHorizontalBar);
-                                  
-                                  // Toggle view button
-                                  document.getElementById('tcad-toggle-view').addEventListener('click', function() {
-                                    isHorizontalBar = !isHorizontalBar;
-                                    createCoverageChart(isHorizontalBar);
-                                  });
-                                });
-                            });
-                          </script>
+              {% if request.args.get('download_report') %}
+              <div class="alert alert-success mt-3">
+                <p><i class="fas fa-file-download me-2"></i> Report is ready for download!</p>
+                <a href="{{ url_for('download_report', filename=request.args.get('download_report')) }}"
+                  class="btn btn-primary">
+                  <i class="fas fa-download me-1"></i> Download Report
+                </a>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Add New Test Cases -->
+          <div class="card mt-4">
+            <div class="card-header">
+              Add New Test Cases
+            </div>
+            <div class="card-body">
+              <form action="{{ url_for('add_test_cases') }}" method="post" id="addTestFormInline">
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="inline_test_id" class="form-label">Test ID</label>
+                      <input type="text" class="form-control" id="inline_test_id" name="test_id[]" placeholder="TC-0001"
+                        required>
+                    </div>
                   </div>
+                  <div class="col-md-8">
+                    <div class="mb-3">
+                      <label for="inline_description" class="form-label">Description</label>
+                      <input type="text" class="form-control" id="inline_description" name="description[]"
+                        placeholder="Test case description" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label for="inline_website_url" class="form-label">Website URL</label>
+                      <input type="url" class="form-control" id="inline_website_url" name="website_url[]"
+                        placeholder="https://example.com/login" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="inline_username" class="form-label">Username</label>
+                      <input type="text" class="form-control" id="inline_username" name="username[]"
+                        placeholder="testuser" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="inline_password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="inline_password" name="password[]"
+                        placeholder="password" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="inline_expected" class="form-label">Expected Result</label>
+                      <select class="form-select" id="inline_expected" name="expected[]" required>
+                        <option value="Success">Success</option>
+                        <option value="Failed">Failed</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-8 d-flex align-items-end">
+                    <button type="button" class="btn btn-outline-primary me-2" id="advanced-options-toggle">
+                      Advanced Options
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Advanced Options (Hidden by Default) -->
+                <div id="advanced-options" class="d-none">
+                  <div class="row mb-3">
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="inline_username_field" class="form-label">Username Field</label>
+                        <input type="text" class="form-control" id="inline_username_field" name="username_field[]"
+                          placeholder="username" value="username">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="inline_password_field" class="form-label">Password Field</label>
+                        <input type="text" class="form-control" id="inline_password_field" name="password_field[]"
+                          placeholder="password" value="password">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="inline_submit_button" class="form-label">Submit Button</label>
+                        <input type="text" class="form-control" id="inline_submit_button" name="submit_button[]"
+                          placeholder="login" value="login">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="inline_success_indicators" class="form-label">Success Indicators</label>
+                        <input type="text" class="form-control" id="inline_success_indicators"
+                          name="success_indicators[]" placeholder="dashboard,home,profile"
+                          value="dashboard,home,profile,welcome,index">
+                        <div class="form-text">Comma-separated words to identify successful login</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="inline_logout_url" class="form-label">Logout URL (Optional)</label>
+                        <input type="text" class="form-control" id="inline_logout_url" name="logout_url[]"
+                          placeholder="https://example.com/logout">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Save Test Cases
+                  </button>
+                </div>
+              </form>
             </div>
+          </div>
         </div>
-    </div>
 
-    <!-- Add Test Case Modal (Keeping from original) -->
-    <!-- Clear Tests Confirmation Modal (Keeping from original) -->
-    <div class="modal fade" id="clearTestsModal" tabindex="-1" aria-labelledby="clearTestsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="clearTestsModalLabel"><i class="fas fa-exclamation-triangle me-2"></i>Clear All Test Cases</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Test Case Generation Tab -->
+        <div class="tab-pane fade" id="test-generation" role="tabpanel" aria-labelledby="test-generation-tab">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-header">
+                  <i class="fas fa-magic me-2"></i>Generate Test Cases with AI
                 </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to clear all test cases? This action cannot be undone.</p>
+                <div class="card-body">
+                  <form action="{{ url_for('generate_test_cases') }}" method="post">
+                    <div class="mb-3">
+                      <label for="page_name" class="form-label">Page/Feature Name</label>
+                      <input type="text" class="form-control" id="page_name" name="page_name"
+                        placeholder="Login Page, Registration Form, etc." required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="additional_context" class="form-label">Additional Context (Optional)</label>
+                      <textarea class="form-control" id="additional_context" name="additional_context" rows="5"
+                        placeholder="Describe the page features, functionality, requirements, etc. to get more relevant test cases"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fas fa-magic me-1"></i> Generate Test Cases
+                    </button>
+                  </form>
+
+                  <div class="mt-4">
+                    <div class="alert alert-info">
+                      <i class="fas fa-info-circle me-2"></i> The AI will generate test cases based on the provided
+                      information and return a Word document.
+                    </div>
+                  </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a href="{{ url_for('clear_tests') }}" class="btn btn-danger">
-                        <i class="fas fa-trash me-1"></i> Clear All
-                    </a>
-                </div>
+              </div>
             </div>
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-header">
+                  <i class="fab fa-figma me-2"></i>Generate Test Cases from Figma Design
+                </div>
+                <div class="card-body">
+                  <form action="{{ url_for('generate_from_figma') }}" method="post">
+                    <div class="mb-3">
+                      <label for="figma_file_key" class="form-label">Figma File Key</label>
+                      <input type="text" class="form-control" id="figma_file_key" name="figma_file_key"
+                        placeholder="e.g. aBcDeFgHiJkL" required>
+                      <div class="form-text">The file key is found in the Figma URL: figma.com/file/<span
+                          class="text-danger">aBcDeFgHiJkL</span>/...</div>
+                    </div>
+                    <!-- Hidden to match provided UI but keeping for Flask functionality -->
+                    <input type="hidden" id="figma_access_token" name="figma_access_token" value="{{ figma_token }}">
+
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fab fa-figma me-1"></i> Generate Test Cases from Figma
+                    </button>
+                  </form>
+
+                  <div class="mt-4">
+                    <div class="alert alert-info">
+                      <i class="fas fa-info-circle me-2"></i> The system will analyze your Figma design and generate
+                      appropriate test cases in a Word document.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
 
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Toggle advanced options
-        document.getElementById('advanced-options-toggle').addEventListener('click', function() {
-            const advancedOptions = document.getElementById('advanced-options');
-            advancedOptions.classList.toggle('d-none');
-            this.textContent = advancedOptions.classList.contains('d-none') ? 'Advanced Options' : 'Hide Advanced Options';
-        });
+        <div class="tab-pane fade" id="analysis" role="tabpanel" aria-labelledby="analysis-tab">
 
-        // Select all checkboxes
-        document.getElementById('selectAll')?.addEventListener('change', function() {
-            const checkboxes = document.querySelectorAll('input[name="selected_tests[]"]');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = this.checked;
-            });
-        });
+          <!-- Summary Stats -->
+          <div class="tcad-container">
+            <div class="tcad-header">
+              <div class="tcad-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div>
+                <h1 class="tcad-title">Test Case Analysis</h1>
+                <p class="tcad-subtitle">Performance metrics and test execution statistics</p>
+              </div>
+            </div>
 
-        // Clone and add a new test case in the modal
-        document.getElementById('add-test-case-btn')?.addEventListener('click', function() {
-            const container = document.getElementById('test-cases-container');
-            const testCases = container.querySelectorAll('.test-case-form');
-            const lastTestCase = testCases[testCases.length - 1];
-            const newTestCase = lastTestCase.cloneNode(true);
-            
-            // Update IDs and clear values
-            const newIndex = testCases.length;
-            const inputs = newTestCase.querySelectorAll('input, select');
-            inputs.forEach(input => {
-                const name = input.getAttribute('name');
-                const idBase = input.id.split('_').slice(0, -1).join('_');
-                input.id = `${idBase}_${newIndex}`;
-                
-                // Only clear non-default fields
-                if (!(['username_field[]', 'password_field[]', 'submit_button[]', 'success_indicators[]'].includes(name))) {
-                    input.value = '';
-                }
-            });
-            
-            // Append the new test case
-            container.appendChild(newTestCase);
-            
-            // Add a remove button for all but the first test case
-            if (testCases.length > 0) {
-                const removeButton = document.createElement('button');
-                removeButton.type = 'button';
-                removeButton.className = 'btn btn-sm btn-outline-danger mt-2';
-                removeButton.innerHTML = '<i class="fas fa-times me-1"></i> Remove this test case';
-                removeButton.onclick = function() {
-                    this.closest('.test-case-form').remove();
-                };
-                newTestCase.appendChild(removeButton);
-            }
-        });
-        
-        // Add another test inline
-        document.getElementById('add-another-test-btn')?.addEventListener('click', function() {
-            const form = document.getElementById('addTestFormInline');
-            const originalInputs = form.querySelectorAll('input, select');
-            const dividers = form.querySelectorAll('.row');
-            
-            // Clone each row and clear input values
-            dividers.forEach(divider => {
-                const clone = divider.cloneNode(true);
-                const inputs = clone.querySelectorAll('input, select');
-                
-                inputs.forEach(input => {
-                    const name = input.getAttribute('name');
-                    // Only clear non-default fields
-                    if (!(['username_field[]', 'password_field[]', 'submit_button[]', 'success_indicators[]'].includes(name))) {
-                        input.value = '';
+            <!-- Summary Stats -->
+            <div class="tcad-stats-grid">
+              <div class="tcad-stat-card">
+                <p class="tcad-stat-label"><i class="fas fa-tasks tcad-stat-icon"></i>Total Tests</p>
+                <h2 class="tcad-stat-value tcad-value-total" id="tcad-totalTests">0</h2>
+              </div>
+              <div class="tcad-stat-card">
+                <p class="tcad-stat-label"><i class="fas fa-check-circle tcad-stat-icon"></i>Passed</p>
+                <h2 class="tcad-stat-value tcad-value-passed" id="tcad-passedTests">0</h2>
+              </div>
+              <div class="tcad-stat-card">
+                <p class="tcad-stat-label"><i class="fas fa-times-circle tcad-stat-icon"></i>Failed</p>
+                <h2 class="tcad-stat-value tcad-value-failed" id="tcad-failedTests">0</h2>
+              </div>
+              <div class="tcad-stat-card">
+                <p class="tcad-stat-label"><i class="fas fa-percentage tcad-stat-icon"></i>Pass Rate</p>
+                <h2 class="tcad-stat-value tcad-value-rate" id="tcad-passRate">0%</h2>
+              </div>
+            </div>
+
+            <!-- Chart Row -->
+            <div class="tcad-charts-row">
+              <div class="tcad-chart-card">
+                <h3 class="tcad-chart-title">Passed vs Failed</h3>
+                <div class="tcad-chart-container">
+                  <canvas id="tcad-donutChart"></canvas>
+                </div>
+              </div>
+              <div class="tcad-chart-card">
+                <h3 class="tcad-chart-title">Test Completion</h3>
+                <div class="tcad-chart-container">
+                  <canvas id="tcad-gaugeChart"></canvas>
+                </div>
+              </div>
+              <div class="tcad-chart-card">
+                <h3 class="tcad-chart-title">Tests by Browser</h3>
+                <div class="tcad-chart-container">
+                  <canvas id="tcad-browserChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Full Width Charts -->
+            <div class="tcad-chart-card tcad-full-chart">
+              <h3 class="tcad-chart-title">Test Execution Over Time</h3>
+              <div class="tcad-chart-container">
+                <canvas id="tcad-areaChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Enhanced Coverage Section -->
+            <div class="tcad-coverage-container">
+              <div class="tcad-coverage-header">
+                <h3 class="tcad-coverage-title">
+                  <i class="fas fa-layer-group"></i>
+                  Test Coverage by Description
+                </h3>
+                <button id="tcad-toggle-view"
+                  style="background: #9333ea; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500;">
+                  Toggle View
+                </button>
+              </div>
+
+              <div class="tcad-coverage-legend" id="tcad-coverage-legend">
+                <!-- Legend will be populated dynamically -->
+              </div>
+
+              <div class="tcad-coverage-chart">
+                <canvas id="tcad-coverageBarChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              // Theme colors
+              const themeColors = [
+                '#9333ea', // Purple
+                '#7e22ce', // Dark Purple
+                '#6d28d9', // Indigo
+                '#8b5cf6', // Violet
+                '#a855f7', // Pink Purple
+                '#c026d3', // Fuchsia
+                '#4338ca', // Deep indigo
+                '#4f46e5'  // Blue indigo
+              ];
+
+              let isHorizontalBar = true;
+              let coverageChart; // Reference to the coverage chart for updating
+
+              fetch("/get_chart_data")
+                .then(response => response.json())
+                .then(data => {
+                  // Update summary stats
+                  document.getElementById("tcad-totalTests").textContent = data.total;
+                  document.getElementById("tcad-passedTests").textContent = data.passed;
+                  document.getElementById("tcad-failedTests").textContent = data.failed;
+                  document.getElementById("tcad-passRate").textContent = data.progress + "%";
+
+                  // Charts configuration
+                  const chartOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                      legend: {
+                        position: 'bottom',
+                        labels: {
+                          boxWidth: 12,
+                          padding: 15,
+                          font: {
+                            size: 11
+                          }
+                        }
+                      },
+                      tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#111827',
+                        bodyColor: '#374151',
+                        borderColor: '#e5e7eb',
+                        borderWidth: 1,
+                        padding: 12,
+                        boxWidth: 8,
+                        boxHeight: 8,
+                        usePointStyle: true,
+                        cornerRadius: 6,
+                        titleFont: {
+                          weight: 'bold'
+                        }
+                      }
                     }
+                  };
+
+                  // Donut Chart (Passed vs Failed)
+                  new Chart(document.getElementById("tcad-donutChart"), {
+                    type: "doughnut",
+                    data: {
+                      labels: ["Passed", "Failed"],
+                      datasets: [{
+                        data: [data.passed, data.failed],
+                        backgroundColor: ["#16a34a", "#dc2626"],
+                        borderWidth: 1,
+                        borderColor: '#fff'
+                      }]
+                    },
+                    options: {
+                      ...chartOptions,
+                      cutout: "70%"
+                    }
+                  });
+
+                  // Gauge Chart (Completion)
+                  new Chart(document.getElementById("tcad-gaugeChart"), {
+                    type: "doughnut",
+                    data: {
+                      labels: ["Completed", "Remaining"],
+                      datasets: [{
+                        data: [data.progress, 100 - data.progress],
+                        backgroundColor: ["#9333ea", "#e5e7eb"],
+                        borderWidth: 0
+                      }]
+                    },
+                    options: {
+                      ...chartOptions,
+                      cutout: "80%",
+                      rotation: -90,
+                      circumference: 180,
+                      plugins: {
+                        legend: { display: false },
+                        tooltip: chartOptions.plugins.tooltip
+                      }
+                    }
+                  });
+
+                  // Bar Chart (Browsers)
+                  new Chart(document.getElementById("tcad-browserChart"), {
+                    type: "bar",
+                    data: {
+                      labels: Object.keys(data.browser_count),
+                      datasets: [{
+                        label: "Tests",
+                        data: Object.values(data.browser_count),
+                        backgroundColor: "#7e22ce",
+                        borderRadius: 6
+                      }]
+                    },
+                    options: {
+                      ...chartOptions,
+                      plugins: {
+                        legend: { display: false },
+                        tooltip: chartOptions.plugins.tooltip
+                      },
+                      scales: {
+                        y: {
+                          beginAtZero: true,
+                          grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                          }
+                        },
+                        x: {
+                          grid: {
+                            display: false
+                          }
+                        }
+                      }
+                    }
+                  });
+
+                  // Area Chart (Time Series)
+                  new Chart(document.getElementById("tcad-areaChart"), {
+                    type: "line",
+                    data: {
+                      labels: data.dates,
+                      datasets: [{
+                        label: "Tests Executed",
+                        data: data.tests_executed,
+                        backgroundColor: "rgba(147, 51, 234, 0.2)",
+                        borderColor: "#9333ea",
+                        pointBackgroundColor: "#9333ea",
+                        pointBorderColor: "#fff",
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        fill: true,
+                        tension: 0.3
+                      }]
+                    },
+                    options: {
+                      ...chartOptions,
+                      scales: {
+                        y: {
+                          beginAtZero: true,
+                          grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                          }
+                        },
+                        x: {
+                          grid: {
+                            display: false
+                          }
+                        }
+                      }
+                    }
+                  });
+
+                  // Create dynamic coverage data
+                  const coverageLabels = Object.keys(data.description_coverage);
+                  const coverageData = Object.values(data.description_coverage);
+
+                  // Create colored datasets for coverage
+                  const backgroundColors = coverageLabels.map((_, i) => themeColors[i % themeColors.length]);
+
+                  // Create legend
+                  const legendContainer = document.getElementById('tcad-coverage-legend');
+                  coverageLabels.forEach((label, i) => {
+                    const legendItem = document.createElement('div');
+                    legendItem.className = 'tcad-legend-item';
+
+                    const colorSquare = document.createElement('div');
+                    colorSquare.className = 'tcad-legend-color';
+                    colorSquare.style.backgroundColor = backgroundColors[i];
+
+                    const labelText = document.createElement('span');
+                    labelText.textContent = label;
+
+                    legendItem.appendChild(colorSquare);
+                    legendItem.appendChild(labelText);
+                    legendContainer.appendChild(legendItem);
+                  });
+
+                  // Function to create coverage chart
+                  function createCoverageChart(horizontal) {
+                    if (coverageChart) {
+                      coverageChart.destroy();
+                    }
+
+                    coverageChart = new Chart(document.getElementById("tcad-coverageBarChart"), {
+                      type: "bar",
+                      data: {
+                        labels: coverageLabels,
+                        datasets: [{
+                          label: "Test Count",
+                          data: coverageData,
+                          backgroundColor: backgroundColors,
+                          borderRadius: 6,
+                          maxBarThickness: horizontal ? 28 : 50
+                        }]
+                      },
+                      options: {
+                        ...chartOptions,
+                        indexAxis: horizontal ? "y" : "x",
+                        plugins: {
+                          legend: { display: false },
+                          tooltip: {
+                            ...chartOptions.plugins.tooltip,
+                            callbacks: {
+                              title: function (context) {
+                                return context[0].label;
+                              },
+                              label: function (context) {
+                                return `Tests: ${context.raw}`;
+                              }
+                            }
+                          }
+                        },
+                        scales: {
+                          x: {
+                            beginAtZero: true,
+                            grid: {
+                              color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                          },
+                          y: {
+                            grid: {
+                              color: horizontal ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0.05)'
+                            }
+                          }
+                        },
+                        animation: {
+                          duration: 500,
+                          easing: 'easeOutQuart'
+                        }
+                      }
+                    });
+                  }
+
+                  // Initialize coverage chart
+                  createCoverageChart(isHorizontalBar);
+
+                  // Toggle view button
+                  document.getElementById('tcad-toggle-view').addEventListener('click', function () {
+                    isHorizontalBar = !isHorizontalBar;
+                    createCoverageChart(isHorizontalBar);
+                  });
                 });
-                
-                form.insertBefore(clone, this.parentNode);
             });
-            
-            // Add a visual separator
-            const separator = document.createElement('hr');
-            separator.className = 'my-4';
-            form.insertBefore(separator, this.parentNode);
-        });
-    </script>
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Test Case Modal (Keeping from original) -->
+  <!-- Clear Tests Confirmation Modal (Keeping from original) -->
+  <div class="modal fade" id="clearTestsModal" tabindex="-1" aria-labelledby="clearTestsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="clearTestsModalLabel"><i class="fas fa-exclamation-triangle me-2"></i>Clear All
+            Test Cases</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to clear all test cases? This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <form action="{{ url_for('clear_tests') }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger">
+              <i class="fas fa-trash me-1"></i> Clear All
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download Project Modal -->
+  <div class="modal fade" id="downloadProjectModal" tabindex="-1" aria-labelledby="downloadProjectModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="downloadProjectModalLabel"><i class="fas fa-download me-2"></i>Download Project
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="downloadProjectForm" action="{{ url_for('send_project_to_developers') }}" method="POST">
+            <div class="mb-3">
+              <label for="client_name" class="form-label">Your Name*</label>
+              <input type="text" class="form-control" id="client_name" name="client_name" required>
+            </div>
+            <div class="mb-3">
+              <label for="client_email" class="form-label">Your Email Address*</label>
+              <input type="email" class="form-control" id="client_email" name="client_email" required>
+            </div>
+            <div class="mb-3">
+              <label for="client_company" class="form-label">Company Name</label>
+              <input type="text" class="form-control" id="client_company" name="client_company">
+            </div>
+            <div class="mb-3">
+              <label for="client_phone" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="client_phone" name="client_phone">
+            </div>
+            <div class="mb-3">
+              <label for="project_requirements" class="form-label">Additional Requirements or Notes</label>
+              <textarea class="form-control" id="project_requirements" name="project_requirements" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" form="downloadProjectForm" class="btn btn-primary">
+            <i class="fas fa-paper-plane me-1"></i> Submit and Download
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download success modal -->
+  <div class="modal fade" id="downloadSuccessModal" tabindex="-1" aria-labelledby="downloadSuccessModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="downloadSuccessModalLabel"><i class="fas fa-check-circle me-2"></i>Success!</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Thank you for your interest! Your request has been sent to our development team.</p>
+          <p>You will receive the project files shortly.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Toggle advanced options
+    document.getElementById('advanced-options-toggle').addEventListener('click', function () {
+      const advancedOptions = document.getElementById('advanced-options');
+      advancedOptions.classList.toggle('d-none');
+      this.textContent = advancedOptions.classList.contains('d-none') ? 'Advanced Options' : 'Hide Advanced Options';
+    });
+
+    // Select all checkboxes
+    document.getElementById('selectAll')?.addEventListener('change', function () {
+      const checkboxes = document.querySelectorAll('input[name="selected_tests[]"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+      });
+    });
+
+    // Clone and add a new test case in the modal
+    document.getElementById('add-test-case-btn')?.addEventListener('click', function () {
+      const container = document.getElementById('test-cases-container');
+      const testCases = container.querySelectorAll('.test-case-form');
+      const lastTestCase = testCases[testCases.length - 1];
+      const newTestCase = lastTestCase.cloneNode(true);
+
+      // Update IDs and clear values
+      const newIndex = testCases.length;
+      const inputs = newTestCase.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        const name = input.getAttribute('name');
+        const idBase = input.id.split('_').slice(0, -1).join('_');
+        input.id = `${idBase}_${newIndex}`;
+
+        // Only clear non-default fields
+        if (!(['username_field[]', 'password_field[]', 'submit_button[]', 'success_indicators[]'].includes(name))) {
+          input.value = '';
+        }
+      });
+
+      // Append the new test case
+      container.appendChild(newTestCase);
+
+      // Add a remove button for all but the first test case
+      if (testCases.length > 0) {
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'btn btn-sm btn-outline-danger mt-2';
+        removeButton.innerHTML = '<i class="fas fa-times me-1"></i> Remove this test case';
+        removeButton.onclick = function () {
+          this.closest('.test-case-form').remove();
+        };
+        newTestCase.appendChild(removeButton);
+      }
+    });
+
+
+
+
+  </script>
 </body>
+
 </html>
