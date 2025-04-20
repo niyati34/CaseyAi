@@ -753,7 +753,6 @@ def clear_tests():
     
     return redirect(url_for('dashboard'))
 
-
 # ✅ Clear Selected Test Cases Route
 @app.route('/clear_selected_tests', methods=['POST'])
 def clear_selected_tests():
