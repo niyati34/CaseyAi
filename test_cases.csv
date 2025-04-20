@@ -1,4 +1,3 @@
 id,description,website_url,username,password,username_field,password_field,submit_button,success_indicators,logout_url,expected,browser,actual_result
-tc101,login,https://practicetestautomation.com/practice-test-login/,student,Password123,username,password,submit,"dashboard,home,profile,welcome,index",,Success,chrome,Success
-tc102,ui,https://login.marwadiuniversity.ac.in:553/,92200103139,uikjjh,username,password,login,"dashboard,home,profile,welcome,index",,Success,chrome,
-tc102,jhxagsjs,https://web.whatsapp.com/,qwdqw,wwww,username,password,login,"dashboard,home,profile,welcome,index",,Success,chrome,
+TC001,valid id password,https://practicetestautomation.com/practice-test-login/,student,Password123,username,password,submit,"dashboard,home,profile,welcome,index",,Success,chrome,Success
+TC002,invalid id password,https://gdgcmarwadiuniversity.tech/admin/login.php,GDG_Dev,123,username,password,login,"dashboard,home,profile,welcome,index",,Success,chrome,Failed
