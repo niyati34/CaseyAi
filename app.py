@@ -17,6 +17,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from flask import Flask, render_template, request, redirect, url_for, send_file, flash,jsonify
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import os
+from datetime import datetime
 from docx import Document
 import google.generativeai as genai
 from dotenv import load_dotenv
@@ -34,6 +39,66 @@ load_dotenv(verbose=False)
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = "testing_automation_secret_key"
+
+# Add this route to your Flask application
+@app.route('/send_project_to_developers', methods=['POST'])
+def send_project_to_developers():
+    # Get form data
+    client_name = request.form.get('client_name')
+    client_email = request.form.get('client_email')
+    client_company = request.form.get('client_company', 'Not provided')
+    client_phone = request.form.get('client_phone', 'Not provided')
+    project_requirements = request.form.get('project_requirements', 'None')
+    
+    # Developer email(s) - replace with your actual developer email list
+    developer_emails = ['tannadev05@gmail.com', 'naishadgohel33@gmail.com', 'dhairyad981@gmail.com', 'niyati4201@gmail.com']
+    
+    # Email settings
+    sender_email = "aidotcasey@gmail.com"  # Set as environment variable for security
+    sender_password = "dqzt qoho fzjo cczp"  # Set as environment variable for security
+    
+    # Create message
+    message = MIMEMultipart()
+    message['From'] = sender_email
+    message['To'] = ', '.join(developer_emails)
+    message['Subject'] = f'New Project Download Request from {client_name}'
+    
+    # Email body
+    body = f"""
+    A client has requested to download the CaseyAI Test Automation project:
+    
+    Client Information:
+    ------------------
+    Name: {client_name}
+    Email: {client_email}
+    Company: {client_company}
+    Phone: {client_phone}
+    
+    Additional Requirements:
+    ----------------------
+    {project_requirements}
+    
+    Please follow up with the client as soon as possible.
+    """
+    
+    message.attach(MIMEText(body, 'plain'))
+    
+    try:
+        # Create SMTP session
+        server = smtplib.SMTP('smtp.gmail.com', 587)  # Adjust for your email provider
+        server.starttls()  # Secure the connection
+        server.login(sender_email, sender_password)
+        
+        # Send email
+        text = message.as_string()
+        server.sendmail(sender_email, developer_emails, text)
+        server.quit()
+        
+        flash('Your project download request has been sent to our developers!', 'success')
+    except Exception as e:
+        flash(f'There was an issue sending your request: {str(e)}', 'danger')
+    
+    return redirect(url_for('dashboard'))
 
 @app.route("/")
 def home():
@@ -136,7 +201,8 @@ def setup_driver(website_url=None, browser_type="chrome", headless=False):
             if browser_type.lower() == "chrome":
                 chrome_options = ChromeOptions()
                 if headless_mode:
-                    chrome_options.add_argument("--window-size=1920,1080")
+                    chrome_options.add_argument("--headless")
+                chrome_options.add_argument("--window-size=1920,1080")
                 chrome_options.add_argument("--disable-gpu")
                 chrome_options.add_argument("--no-sandbox")
                 chrome_options.add_argument("--disable-dev-shm-usage")
@@ -752,7 +818,6 @@ def clear_tests():
         flash(f"Error clearing test cases: {str(e)}")
     
     return redirect(url_for('dashboard'))
-
 
 # ✅ Clear Selected Test Cases Route
 @app.route('/clear_selected_tests', methods=['POST'])
