@@ -95,10 +95,7 @@ Build an intelligent agent that automates test planning, test case generation, e
  - Modify .github/workflows/main.yml to customize your build/test steps.
  - On every push, the platform auto-runs all test suites and deploys if successful.
 
----
-## 📄 License
 
-This project is licensed under the MIT License. See LICENSE for more details.
 
 
 
