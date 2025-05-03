@@ -69,7 +69,16 @@ Build an intelligent agent that automates test planning, test case generation, e
 - ✅ Test reports for monitoring & feedback.
 
 ---
+---
 
+## 📸 screenshot
+![Screenshot (828)](https://github.com/user-attachments/assets/be2801f1-5fc5-4039-beec-1ba30ea8e4f3)
+![WhatsApp Image 2025-03-31 at 12 16 47 PM](https://github.com/user-attachments/assets/82dff144-2f3f-4039-a360-17fc760a8587)
+![WhatsApp Image 2025-03-31 at 12 17 24 PM](https://github.com/user-attachments/assets/cc15002d-4616-4775-869e-9f002f681c6f)
+
+
+
+---
 
 ## 💡 How to Use
 
