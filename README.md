@@ -1,6 +1,6 @@
 # 🚀 CaseyAI – Intelligent Test Automation Agent
 
-🔗 **Live Demo**: [CaseyAI Live](https://caseyai-production.up.railway.app/)
+🔗 **Live Demo**: [CaseyAI Live](https://caseyai.onrender.com)
 
 🏆 **HackNUThon Triumph**: Top 10 Winner in the **Rapidops Inc. Track** at Nirma University’s HackNUThon!
 
